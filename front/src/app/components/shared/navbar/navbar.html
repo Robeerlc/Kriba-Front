@@ -7,22 +7,19 @@
   </button>
 
   <div class="collapse navbar-collapse" id="menu">
-    <ul class="navbar-nav ms-auto gap-3">
+    <ul class="navbar-nav ms-auto gap-3 flex-row align-items-center">
       <li class="nav-item">
         <a class="nav-link" routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a>
       </li>
        @if (userLoginOn) {
         <li class="nav-item">
-          <!--<img src="/images/userLogo.png" alt="" routerLink="/login" style="width: 30px; height: 30px; border-radius: 50%; cursor: pointer;">-->
-          <a class="nav-link" href="#" (click)="onLogout()">Cerrar Sesion</a>
+          <img src="/images/userLogo.png" alt="" routerLink="/login" style="width: 30px; height: 30px; border-radius: 50%; cursor: pointer;">
+          <!--<a class="nav-link" href="#" (click)="onLogout()">Cerrar Sesion</a>-->
         </li>
       }@else {
         <li class="nav-item">
-          <a class="nav-link" routerLink="/" routerLinkActive="active">Profile</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/register" routerLinkActive="active">Register</a>
-        </li>
+        <a class="nav-link" routerLink="/" routerLinkActive="active">LogIn</a>
+      </li>
       }
     </ul>
   </div>

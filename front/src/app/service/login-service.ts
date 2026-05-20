@@ -33,9 +33,9 @@ export class LoginService {
         this.currentUserLoginOn.next(true);
 
         // Serializa un array de string
-        localStorage.setItem('auth', JSON.stringify({user: userData, logged: true}));   
+        localStorage.setItem('auth', JSON.stringify({user: userData, logged: true}));
         localStorage.setItem('email', credentials.email);
-        localStorage.setItem('password', credentials.password); 
+        localStorage.setItem('password', credentials.password);
       }),
       catchError(this.handleError)
     );
@@ -88,8 +88,8 @@ export class LoginService {
     this.currentUserData.next(userData);
     this.currentUserLoginOn.next(true);
 
-    localStorage.setItem('auth', JSON.stringify({user: userData, logged: true}));   
+    localStorage.setItem('auth', JSON.stringify({user: userData, logged: true}));
     localStorage.setItem('email', formData.email);
-    localStorage.setItem('password', formData.password); 
+    localStorage.setItem('password', formData.password);
   }
 }
