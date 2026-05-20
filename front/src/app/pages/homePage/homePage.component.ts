@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LateralBarComponent } from '../../components/shared/lateralBar/lateralBarComponent';
 import { ArticleCardComponent } from '../../components/shared/articlecard/articlecard';
-import { HttpClient } from '@angular/common/http';
+import { FeedService } from '../../service/feedService.servive';
+import { Article } from '../../interfaces/article.interface';
 
 @Component({
   selector: 'app-homepage',
@@ -11,32 +12,17 @@ import { HttpClient } from '@angular/common/http';
   templateUrl: './homePage.component.html',
   styleUrls: ['./homePage.component.css']
 })
-export class HomePageComponent implements OnInit {
+export class HomePageComponent {
   // Variables simples
-  articles: any[] = [];
-  recomendaciones: any[] = [];
-  cargando: boolean = true;
-
-  constructor(private http: HttpClient) {}
-
-  ngOnInit() {
-    this.cargarArticulos();
+ articles = signal<Article[]>([]);
+  private feedService = inject(FeedService)
+  constructor() {
+    this.feedService.getFeed().subscribe(data=>{
+       this.articles.set(data.articles);
+    })
   }
 
-  cargarArticulos() {
-    // Cargar el JSON
-    this.http.get('/api/feed.json').subscribe({
-      next: (data: any) => {
-        this.articles = data.articles;
-        this.recomendaciones = data.recommendations;
-        this.cargando = false;
-      },
-      error: (error) => {
-        console.error('Error al cargar:', error);
-        this.cargando = false;
-      }
-    });
-  }
+
 
   // Acciones simples
   onAISummary(id: string) {

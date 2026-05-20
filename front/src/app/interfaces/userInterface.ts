@@ -1,7 +1,5 @@
-export interface UserInterface{
-    id:number;
-    name?:string;
-    lastName?:string;
-    email?:string;
-    message?:string;
+export interface UserInterface {
+  userId: number;
+  username: string;
+  dailyAiLimit: number;
 }
