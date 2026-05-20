@@ -1,0 +1,34 @@
+{
+  "articles": [
+    {
+      "externalId": "1",
+      "title": "New graphene battery discovered",
+      "summary": "Scientists have discovered a new type of graphene battery that could revolutionize energy storage",
+      "publishedDate": "2026-05-14T09:00:00Z",
+      "source": "The Verge",
+      "category": "Energy",
+      "icon": "fas fa-bolt"
+    },
+    {
+      "externalId": "2",
+      "title": "Quantum Computing Breakthrough",
+      "summary": "Researchers at MIT have published a paper detailing a novel approach to error correction",
+      "publishedDate": "2026-05-18T08:30:00Z",
+      "source": "The Verge",
+      "category": "Tech",
+      "icon": "fas fa-microchip"
+    }
+  ],
+  "recommendations": [
+    {
+      "id": "rec1",
+      "category": "Science",
+      "title": "New Deep Sea Ecosystems Discovered"
+    },
+    {
+      "id": "rec2",
+      "category": "Tech",
+      "title": "Generative AI and copyright"
+    }
+  ]
+}

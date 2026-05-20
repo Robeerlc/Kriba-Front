@@ -1,0 +1,20 @@
+<!-- article-card.component.html -->
+ <div style="border: 1px solid #e0e0e0; border-radius: 12px; padding: 20px; margin-bottom: 20px;">
+            <div style="color: #666; font-size: 12px; margin-bottom: 10px;">
+                <span>{{ article.category }} | {{ article.source }}</span>
+                <span style="margin-left: 10px;">{{ article.publishedDate | date }}</span>
+            </div>
+
+            <h2 style="font-size: 24px; margin: 10px 0;">{{ article.title }}</h2>
+
+            <p style="color: #444; line-height: 1.5;">{{ article.summary }}</p>
+
+            <div style="margin-top: 15px;">
+                <button (click)="onAISummary()" style="margin-right: 10px; padding: 5px 15px;">
+                     Resumen IA
+                </button>
+                <a href="#" (click)="onReadFull($event)" style="color: blue; text-decoration: none;">
+                    Leer más →
+                </a>
+            </div>
+        </div>

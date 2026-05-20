@@ -1,0 +1,15 @@
+<div style="display: flex;">
+    <div style="width: 280px; border-right: 1px solid #eee;">
+        <lateralBar></lateralBar>
+    </div>
+
+    <div style="flex: 1; padding: 20px;">
+        @for (articulo of articles(); track articulo.id) {
+            <articlecard
+                [article]="articulo"
+                (aiSummary)="onAISummary($event)"
+                (readFull)="onReadFull($event)">
+            </articlecard>
+        }
+    </div>
+</div>
