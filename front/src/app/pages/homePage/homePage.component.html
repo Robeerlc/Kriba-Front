@@ -1,0 +1,42 @@
+<div style="display: flex;">
+    <!-- Barra lateral -->
+    <div style="width: 280px; border-right: 1px solid #eee;">
+        <lateralBar></lateralBar>
+    </div>
+
+    <!-- Contenido principal -->
+    <div style="flex: 1; padding: 20px;">
+
+        <!-- Mensaje de carga -->
+        @if (cargando) {
+            <div style="text-align: center; padding: 50px;">
+                <p>Cargando noticias...</p>
+            </div>
+        }
+
+        <!-- Lista de artículos -->
+        @if (!cargando) {
+            @for (articulo of articles; track articulo.externalId) {
+                <articlecard
+                    [article]="articulo"
+                    (aiSummary)="onAISummary($event)"
+                    (readFull)="onReadFull($event)">
+                </articlecard>
+            }
+        }
+
+        <!-- Recomendaciones -->
+        @if (!cargando && recomendaciones.length > 0) {
+            <div style="margin-top: 40px; background: #f5f5f5; padding: 20px; border-radius: 16px;">
+                <h3>Recomendado para ti</h3>
+                @for (rec of recomendaciones; track rec.id) {
+                    <div style="padding: 10px 0; border-bottom: 1px solid #ddd;">
+                        <strong>{{ rec.category }}</strong>
+                        <p>{{ rec.title }}</p>
+                        <button (click)="onSummarize(rec.id)">Resumen IA</button>
+                    </div>
+                }
+            </div>
+        }
+    </div>
+</div>
