@@ -3,57 +3,93 @@ import { LoginInterface } from '../interfaces/loginInterface';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { catchError, Observable, throwError, BehaviorSubject, tap } from 'rxjs';
 import { UserInterface } from '../interfaces/userInterface';
+import { RegisterInterface } from '../interfaces/register.interface';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LoginService {
- //Que puede = lo que guarda
-  currentUserLoginOn: BehaviorSubject<boolean>=new BehaviorSubject<boolean>(false);
-  currentUserData: BehaviorSubject<UserInterface>=new BehaviorSubject<UserInterface>({id:0, email:''});
+  //BehaviorSubject ALMACENA VALORES
+  //Subscription ESCUCHA VALORES CAMBIAODS
+  //Observable ENTREGA VALORES
 
+  // Variables globales (gracias al getter) que todos pueden ver y cambiar
+  private currentUserLoginOn = new BehaviorSubject<boolean>(false);
+  private currentUserData = new BehaviorSubject<UserInterface>({userId: 0, username: '', dailyAiLimit: 0});
 
-  // CON SPRING
-  // CAMBIAR LA URL Y PASARLE LAS CREDENCIALES
-  // MIRAR SI DA ERROR CON CrossOrigin
-  constructor(private http:HttpClient){}
-                                    // Contenedor porque la respuesta es asincrona
-  login(credentials:LoginInterface):Observable<UserInterface>{
-    return this.http.get<UserInterface>('./data.json').pipe(
-      // Codigo secundario sin modificar valor
-      tap(userData=>{
-        // next envia el nuevo valor
+  private API_URL = 'http://localhost:8080/api/v1/auth/login';
+
+  // @Inject saber si es navegador o servidor, para que no pete
+  constructor(private http: HttpClient) {
+    this.loadSession();
+  }
+
+  login(credentials: LoginInterface): Observable<UserInterface> {
+    return this.http.post<UserInterface>(this.API_URL, credentials).pipe( //<>  lo que espero
+      // tap trata datos sin modificar, encapsulamiento
+      // userData nombre de una variable que almacena lo que devuelve http
+      tap(userData => {
         this.currentUserData.next(userData);
         this.currentUserLoginOn.next(true);
+
+        // Serializa un array de string
+        localStorage.setItem('auth', JSON.stringify({user: userData, logged: true}));   
+        localStorage.setItem('email', credentials.email);
+        localStorage.setItem('password', credentials.password); 
       }),
       catchError(this.handleError)
     );
   }
 
-  //200 ok
-  //404 no encontro
-  //500 error server
-  //0 falla antes del server (URL)
-  private handleError(error:HttpErrorResponse){
-    if(error.status==0){
-      console.error('Se ha producido un error'+error.error);
-    }else{
-      console.error('Backend retorno el codigo de estado ',error.status, error.error);
+  private handleError(error: HttpErrorResponse) {
+    let errorMessage = 'Algo falló, inténtelo de nuevo';
+    if (error.status === 0) {
+      console.error('Error de red:', error.error);
+    } else {
+      console.error('Error de back:', error.status, error.error);
+      if (error.error?.error) {
+        errorMessage = error.error.error;
+      }
     }
-    return throwError(()=>new Error('Algo fallo intentelo de nuevo'));
+    return throwError(() => new Error(errorMessage));
   }
 
-  // Gettes encapsulamiento
-  get userData():Observable<UserInterface>{
+  // Gatillo subscripciones
+  get userData(): Observable<UserInterface> {
     return this.currentUserData.asObservable();
   }
-
-  get userLoginOn():Observable<boolean>{
+  get userLoginOn(): Observable<boolean> {
     return this.currentUserLoginOn.asObservable();
   }
 
-  logout(): void{
+  private loadSession(): void {
+    if (typeof localStorage === 'undefined') return;
+    const auth = localStorage.getItem('auth');
+    if (auth) {
+      const parsed = JSON.parse(auth);
+      if (parsed.logged) {
+        // Next avisa de las subscripciones
+        this.currentUserData.next(parsed.user);
+        this.currentUserLoginOn.next(true);
+      }
+    }
+  }
+
+  logout(): void {
     this.currentUserLoginOn.next(false);
-    this.currentUserData.next({ id: 0, email: '' });
+    this.currentUserData.next({userId: 0, username: '', dailyAiLimit: 0});
+
+    localStorage.removeItem('auth');
+    localStorage.removeItem('email');
+    localStorage.removeItem('password');
+  }
+
+  keepSession(userData: UserInterface, formData: RegisterInterface): void {
+    this.currentUserData.next(userData);
+    this.currentUserLoginOn.next(true);
+
+    localStorage.setItem('auth', JSON.stringify({user: userData, logged: true}));   
+    localStorage.setItem('email', formData.email);
+    localStorage.setItem('password', formData.password); 
   }
 }
