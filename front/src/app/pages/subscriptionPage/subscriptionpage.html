@@ -1,0 +1,36 @@
+<div class="app-layout">
+  <div class="sidebar-section">
+    <lateralBar></lateralBar>
+  </div>
+
+  <div class="main-feed">
+    <div class="container mt-0">
+      <h2 class="mb-4">Mis Suscripciones</h2>
+
+      <div class="row g-3">
+        @for (sub of subscriptions(); track sub.externalSourceId) {
+          <div class="col-12 col-md-4">
+            <div class="card shadow-sm subscription-hover">
+              <div class="card-body d-flex align-items-center">
+                
+                <span class="fs-2 me-3">📰</span>
+
+                <div class="min-w-0">
+                  <h5 class="card-title mb-1 text-truncate">{{ sub.sourceName }}</h5>
+                  <p class="card-text text-muted small mb-0">ID: {{ sub.externalSourceId }}</p>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        } @empty {
+          <div class="col-12">
+            <div class="alert alert-info text-center">
+              No tienes suscripciones todavía.
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+</div>

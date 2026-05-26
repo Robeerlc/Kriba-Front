@@ -1,0 +1,25 @@
+.app-layout {
+  display: flex;
+  min-height: 100vh;
+  font-family: 'Inter', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+.sidebar-section {
+  width: 280px;
+  border-right: 1px solid #eef2f6;
+  background-color: #ffffff;
+}
+
+.main-feed {
+  flex: 1;
+  padding: 2rem;
+  background-color: #fcfcfd;
+}
+
+.main-feed h2 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #1e2a5e;
+  margin-bottom: 25px;
+}

@@ -1,0 +1,29 @@
+<div class="app-layout">
+    <div class="sidebar-section">
+        <lateralBar></lateralBar>
+    </div>
+
+    <div class="main-feed">
+        <h2>Mis Favoritos</h2>
+
+        @for (fav of favorites(); track fav.id) {
+            <articlecard [article]="{ 
+                id: fav.id, 
+                externalId: fav.externalArticleId, 
+                title: fav.title, 
+                url: fav.url,
+                image: fav.image,
+                description: fav.description,
+                content: fav.content,
+                category: 'Favoritos',
+                publishedAt: '',
+                source: { id: '', name: 'Guardado', url: '' },
+                isFavoritePage: true
+            }"></articlecard>
+        } @empty {
+            <div class="alert alert-info">
+                No tienes ningún artículo guardado en favoritos todavía.
+            </div>
+        }
+    </div>
+</div>

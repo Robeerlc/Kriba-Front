@@ -1,0 +1,21 @@
+{
+  "generalData": [
+    {
+      "category": "technology",
+      "percentage": 45.5
+    },
+    {
+      "category": "sports",
+      "percentage": 25.0
+    },
+    {
+      "category": "health",
+      "percentage": 15.5
+    },
+    {
+      "category": "business",
+      "percentage": 14.0
+    }
+  ],
+  "totalArticlesRead": 142
+}

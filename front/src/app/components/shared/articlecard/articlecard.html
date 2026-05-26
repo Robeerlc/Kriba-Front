@@ -1,20 +1,51 @@
-<!-- article-card.component.html -->
- <div style="border: 1px solid #e0e0e0; border-radius: 12px; padding: 20px; margin-bottom: 20px;">
-            <div style="color: #666; font-size: 12px; margin-bottom: 10px;">
-                <span>{{ article.category }} | {{ article.source }}</span>
-                <span style="margin-left: 10px;">{{ article.publishedDate | date }}</span>
-            </div>
+<div class="article-card">
+  <div class="article-content">
+    <div class="article-header">
 
-            <h2 style="font-size: 24px; margin: 10px 0;">{{ article.title }}</h2>
+      <div class="header-left">
+          <span>{{ article.category }} | <strong>{{ article.source?.name }}</strong></span>
+          <button class="btn-subscribe" (click)="subscribe()">
+            @if (article.isSubscribed) {
+              🔔 Suscribito         
+            } @else {
+              🔕 No subscrito
+            }
+          </button>
+      </div>
+      <div class="article-date">
+        {{ article.publishedAt | date }}
+      </div>
+    </div>
 
-            <p style="color: #444; line-height: 1.5;">{{ article.summary }}</p>
+    <h2 class="article-title">{{ article.title }}</h2>
+    <p class="article-description">{{ article.description }}</p>
 
-            <div style="margin-top: 15px;">
-                <button (click)="onAISummary()" style="margin-right: 10px; padding: 5px 15px;">
-                     Resumen IA
-                </button>
-                <a href="#" (click)="onReadFull($event)" style="color: blue; text-decoration: none;">
-                    Leer más →
-                </a>
-            </div>
-        </div>
+    <div class="article-actions">
+      @if (!article.isFavoritePage) {
+        <button class="btn-heart" (click)="favorite()" (click)="sendInteracitionSave()">
+          @if (article.isFavorite) {
+            <span class="heart-icon active">♥</span>
+          } @else {
+            <span class="heart-icon">♡</span>
+          }
+        </button>
+      }
+
+      <button class="read-full-btn"  (click)="onSummarize(article)">
+        Resumen IA
+      </button>
+      <button class="read-full-btn" (click)="onReadFull($event)" (click)="sendInteracionClick()">
+        Leer más →
+      </button>   
+
+    </div>
+  </div>
+
+    <div class="article-image-container">
+      <img [src]="article.image" 
+           [alt]="article.title" 
+           (error)="imageError($event)"
+           class="article-image" />
+    </div>
+
+</div>

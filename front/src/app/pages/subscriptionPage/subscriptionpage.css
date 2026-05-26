@@ -1,0 +1,60 @@
+.app-layout {
+  display: flex;
+  min-height: 100vh;
+  font-family: 'Inter', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+.sidebar-section {
+  width: 280px;
+  border-right: 1px solid #eef2f6;
+  background-color: #ffffff;
+}
+
+.main-feed {
+  flex: 1;
+  padding: 2rem;
+  background-color: #fcfcfd;
+}
+
+.main-feed h2 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #1e2a5e;
+  margin-bottom: 25px;
+}
+
+.card {
+  border: 1px solid #eef2f6;
+  border-radius: 14px;
+  background-color: #ffffff;
+}
+
+.card-title {
+  font-weight: 600;
+  color: #2c3e50;
+  font-size: 1rem;
+}
+
+.card-text {
+  color: #7c8ba0;
+}
+
+.subscription-hover {
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.subscription-hover:hover {
+  background-color: #f0f4fa;
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(30, 42, 94, 0.05);
+}
+
+.subscription-hover:hover .card-title {
+  color: #1e3a8a;
+}
+
+.min-w-0 {
+  min-width: 0;
+}
