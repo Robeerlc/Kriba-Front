@@ -2,6 +2,7 @@ import { Source } from "./source.interface"
 
 export interface Article{
   externalId: string
+  id:string
   title: string
   description: string
   content: string

@@ -1,0 +1,26 @@
+<div class="container py-4" style="max-width: 800px">
+  <img
+    [src]="article?.image"
+    [alt]="article?.title"
+    class="w-100 rounded-3 mb-4"
+    style="height: 400px; object-fit: cover"
+  />
+
+  <div class="text-muted small mb-2">
+    <span class="text-uppercase fw-semibold" style="color: #00897b">{{ article?.category }}</span>
+    <span class="mx-2">|</span>
+    <span>{{ article?.source?.name }}</span>
+    <span class="mx-2">·</span>
+    <span>{{ article?.publishedAt | date: 'dd MMM yyyy' }}</span>
+  </div>
+
+  <h1 class="fw-bold mb-3">{{ article?.title }}</h1>
+
+  <p class="lead text-muted mb-4">{{ article?.description }}</p>
+
+  <hr class="mb-4" />
+
+  <p style="line-height: 1.8">{{ article?.content }}</p>
+
+  <a [href]="article?.url" target="_blank" class="btn btn-dark mt-4"> Leer artículo original → </a>
+</div>
