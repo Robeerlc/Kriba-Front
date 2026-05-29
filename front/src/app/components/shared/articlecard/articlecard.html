@@ -6,7 +6,7 @@
           <span>{{ article.category }} | <strong>{{ article.source?.name }}</strong></span>
           <button class="btn-subscribe" (click)="subscribe()">
             @if (article.isSubscribed) {
-              🔔 Suscribito         
+              🔔 Suscribito
             } @else {
               🔕 No subscrito
             }
@@ -22,7 +22,7 @@
 
     <div class="article-actions">
       @if (!article.isFavoritePage) {
-        <button class="btn-heart" (click)="favorite()" (click)="sendInteracitionSave()">
+        <button class="btn-heart" (click)="favorite()">
           @if (article.isFavorite) {
             <span class="heart-icon active">♥</span>
           } @else {
@@ -36,14 +36,14 @@
       </button>
       <button class="read-full-btn" (click)="onReadFull($event)" (click)="sendInteracionClick()">
         Leer más →
-      </button>   
+      </button>
 
     </div>
   </div>
 
     <div class="article-image-container">
-      <img [src]="article.image" 
-           [alt]="article.title" 
+      <img [src]="article.image"
+           [alt]="article.title"
            (error)="imageError($event)"
            class="article-image" />
     </div>

@@ -6,6 +6,7 @@ import { FavoriteAricle } from './pages/favoriteArticle/favoriteArticle.componen
 import { NewPageComponent } from './pages/newsPage/newPage.component';
 import { StatsPageComponent } from './pages/statisticsPage/statisticsPage.component';
 import { Subscriptionpage } from './pages/subscriptionPage/subscriptionpage';
+import { UserPageComponent } from './pages/userPage/userPage.component';
 
 export const routes: Routes = [
 
@@ -39,5 +40,9 @@ export const routes: Routes = [
     path: 'subs',
     component: Subscriptionpage,
   },
-  
+  {
+    path: 'userPage',
+    component: UserPageComponent
+  },
+
 ];

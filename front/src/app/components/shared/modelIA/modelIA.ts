@@ -17,7 +17,7 @@ import { ErrorHttpService } from '../../../service/errorHttpService.service';
   templateUrl: './modelIA.html',
   styleUrl: './modelIA.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.None,   // ← permite que ::ng-deep llegue al mat-dialog-container
+  encapsulation: ViewEncapsulation.None,
 })
 export class ModelIA {
   @Input() article: any;
@@ -40,10 +40,12 @@ export class ModelIA {
     this.isLoading = true;
     this.errorMessage = '';
 
-    this.modelAIService.getSummary(this.data.content,this.data.url,this.data.category).subscribe({
+    this.sendInteracition();
+    this.modelAIService.getSummary(this.data.content,this.data.url,this.data.category, this.data.article.id).subscribe({
       next: (summary) => {
         this.summaryResult = summary.summary;
         this.remainingUses = summary.remainingDailyUses;
+        localStorage.setItem('remainingUses', String(summary.remainingDailyUses));
         this.isLoading = false;
         this.cdr.detectChanges();
       },
@@ -55,8 +57,8 @@ export class ModelIA {
     });
   }
 
-  sendInteracition(articleCat: string, interacition: string): void{
-    this.interactionService.postInteraction(this.data.category, 'SUMMARIZE').pipe(catchError((err) => this.errorHttpService.handleError(err)))
+  sendInteracition(): void{
+    this.interactionService.postInteraction(this.data.category, 'CLICK',this.data.article.id).pipe(catchError((err) => this.errorHttpService.handleError(err))).subscribe();
   }
   onReadFull(event: Event) {
     event.preventDefault();

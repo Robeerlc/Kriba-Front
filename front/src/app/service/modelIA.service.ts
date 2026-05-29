@@ -13,7 +13,7 @@ export class ModelIAService {
   private API_URL = 'http://localhost:8080/api/v1/ai/summarize';
   private readonly _dialog = inject(MatDialog);
 
-  getSummary(textContent: string, articleUrl : string, category:string): Observable<Summary> {
+  getSummary(textContent: string, articleUrl: string, category: string, externalId: string): Observable<Summary> {
     if (typeof localStorage == 'undefined') {
       return throwError(() => new Error('No hay sesion'));
     }
@@ -26,27 +26,29 @@ export class ModelIAService {
       },
       textContent: textContent,
       articleUrl: articleUrl,
-      category: category
+      category: category,
+      externalArticleId: externalId
     };
 
     return this.http.post<Summary>(this.API_URL, body).pipe(catchError(this.handleError));
   }
 
-openModel(articleTitle: string, articleContent: string, articleUrl: string, articleCategory:string, article:any) {
-  this._dialog.open(ModelIA, {
-    width: '400px',
-    maxWidth: '90vw',
-    position: { right: '0', top: '0' },
-    panelClass: 'slide-in-modal',
-    hasBackdrop: false,
-    autoFocus: false,
-    data: {
-      title: articleTitle,
-      content: articleContent,
-      url: articleUrl,
-      category: articleCategory,
-      article: article
-    }
+  openModel(articleTitle: string, articleContent: string, articleUrl: string, articleCategory:string, article:any ) {
+    this._dialog.open(ModelIA, {
+      width: '400px',
+      maxWidth: '90vw',
+      position: { right: '0', top: '0' },
+      panelClass: 'slide-in-modal',
+      hasBackdrop: false,
+      autoFocus: false,
+      data: {
+        title: articleTitle,
+        content: articleContent,
+        url: articleUrl,
+        category: articleCategory,
+        article: article,
+
+      }
   });
 }
 

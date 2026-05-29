@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { StatsService } from '../../service/stats.service';
 import { StatsChart } from '../../components/shared/chart/statsChart/statsChart';
 import { CategoryStats } from '../../interfaces/categoryStats.interface';
+import { LateralBarComponent } from "../../components/shared/lateralBar/lateralBarComponent";
 
 @Component({
   selector: 'statistics',
   standalone: true,
-  imports: [CommonModule, StatsChart],
+  imports: [CommonModule, StatsChart, LateralBarComponent],
   templateUrl: './statisticsPage.component.html',
 })
 export class StatsPageComponent {

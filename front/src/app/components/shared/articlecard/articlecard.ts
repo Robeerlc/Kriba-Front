@@ -28,19 +28,20 @@ export class ArticleCardComponent {
     onSummarize(article: any): void {
         this.modelService.openModel(article.title, article.content, article.url, article.category, article);
     }
-    
+
     sendInteracionClick():void{
-        this.interactionService.postInteraction(this.article.category, 'CLICK');
+        this.interactionService.postInteraction(this.article.category, 'CLICK', this.article.id).subscribe();
     }
-    
-    sendInteracitionSave(): void{
-        this.interactionService.postInteraction(this.article.category, 'SAVE')    
+
+    /*sendInteracitionSave(): void{
+        this.interactionService.postInteraction(this.article.category, 'SAVE')
         .pipe(catchError((err) => this.errorHttpService.handleError(err)));
-    }
-    
+    }*/
+
     onReadFull(event: Event) {
         event.preventDefault();
         this.feedService.setArticle(this.article);
+        this.sendInteracionClick()
         this.router.navigate(['/new']);
     }
 
@@ -49,23 +50,23 @@ export class ArticleCardComponent {
     // SI la noticia no tiene imagen
     imageError(event: Event): void {
         const element = event.target as HTMLImageElement;
-        element.src = 'https://placehold.co/150x100?text=No+Image'; 
+        element.src = 'https://placehold.co/150x100?text=No+Image';
     }
 
     favorite(): void {
         if (this.article.isFavorite) {
-            return; 
+            return;
         }
-
+        this.sendInteracionClick()
         const email = localStorage.getItem('email') || '';
         const password = localStorage.getItem('password') || '';
 
         this.article.isFavorite = !this.article.isFavorite;
-        
+
         const favoritePayload: Favorite = {
             loginRequest: { email, password },
             savedNew: {
-            externalArticleId: this.article.externalId ?? '',
+            externalArticleId: this.article.id,
             title: this.article.title,
             url: this.article.url,
             category: this.article.category,
@@ -90,9 +91,9 @@ export class ArticleCardComponent {
 
     subscribe(): void {
         if (this.article.isSubscribed) {
-            return; 
+            return;
         }
-
+        this.sendInteracionClick();
         const email = localStorage.getItem('email') || '';
         const password = localStorage.getItem('password') || '';
 

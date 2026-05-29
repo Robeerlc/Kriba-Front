@@ -8,4 +8,6 @@ import { RouterLink, RouterLinkActive } from "@angular/router";
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrl: './lateralBarComponent.css'
 })
-export class LateralBarComponent {}
+export class LateralBarComponent {
+
+}

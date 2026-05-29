@@ -12,24 +12,22 @@ export class StatsService {
   private API_URL = 'http://localhost:8080/api/v1/statistics';
 
   getStatistics(): Observable<Statistics> {
-    /*if (typeof localStorage === 'undefined') {
+    if (typeof localStorage === 'undefined') {
       return throwError(() => new Error('No hay sesión'));
     }
 
     const email = localStorage.getItem('email');
     const pass = localStorage.getItem('password');
     const body = {
-      loginRequest: {
         email: email,
         password: pass,
-      },
     };
 
-    return this.http.post<Statistics>(this.API_URL, body).pipe(catchError(this.handleError));*/
-    if (typeof localStorage === 'undefined') {
+    return this.http.post<Statistics>(this.API_URL, body).pipe(catchError(this.handleError));
+    /*if (typeof localStorage === 'undefined') {
       return throwError(() => new Error('No hay sesión'));
     }
-    return this.http.get<Statistics>('/api/stats.json').pipe(catchError(this.handleError));
+    return this.http.get<Statistics>('/api/stats.json').pipe(catchError(this.handleError));*/
   }
 
   private handleError(error: HttpErrorResponse) {

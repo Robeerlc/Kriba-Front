@@ -2,5 +2,8 @@ import { Article } from "./article.interface"
 
 export interface Feed{
   totalArticles: number
-  articles: Article[]
+  content: Article[],
+  totalPages:number,
+  last:boolean,
+  totalElements:number
 }

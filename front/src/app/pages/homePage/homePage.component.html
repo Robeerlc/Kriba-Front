@@ -1,16 +1,30 @@
-<div style="display: flex;">
-    <div style="width: 280px; border-right: 1px solid #eee;">
+<div style="display: flex; height: 100vh;">
+    <div style="width: 280px; border-right: 1px solid #eee; overflow-y: auto;">
         <lateralBar></lateralBar>
     </div>
 
-    <div style="flex: 1; padding: 20px;">
-        <!--Indice unico porque el back envia la misma noticias a veces-->
-        @for (articulo of articles(); track $index) {
+    <div style="flex: 1; padding: 20px; overflow-y: auto;" (scroll)="onScroll($event)">
+
+        @for (articulo of visibleArticles(); track $index) {
             <articlecard
                 [article]="articulo"
                 (aiSummary)="onAISummary($event)"
                 (readFull)="onReadFull($event)">
             </articlecard>
         }
+
+        @if (isLoading) {
+            <div style="text-align: center; padding: 20px;">
+                <div class="spinner"></div>
+                <p>Cargando más noticias...</p>
+            </div>
+        }
+
+        @if (!hasMore && visibleArticles().length > 0) {
+            <div style="text-align: center; padding: 20px; color: #999;">
+                No hay más noticias
+            </div>
+        }
+
     </div>
 </div>
