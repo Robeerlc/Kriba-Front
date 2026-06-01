@@ -1,16 +1,37 @@
-<div style="display: flex;">
-    <div style="width: 280px; border-right: 1px solid #eee;">
-        <lateralBar></lateralBar>
-    </div>
-
-    <div style="flex: 1; padding: 20px;">
-        <!--Indice unico porque el back envia la misma noticias a veces-->
-        @for (articulo of articles(); track $index) {
-            <articlecard
-                [article]="articulo"
-                (aiSummary)="onAISummary($event)"
-                (readFull)="onReadFull($event)">
-            </articlecard>
+<div class="container-fluid mt-4">
+  
+  <div class="row mb-4">
+    <div class="col-12">
+      <div class="d-flex flex-wrap justify-content-center gap-2 pb-3 border-bottom">
+        @for (cat of categorias; track cat) {
+          <button 
+            (click)="cambiarCategoria(cat)" 
+            class="btn rounded-pill px-4 py-2 text-capitalize"
+            [class.btn-dark]="categoriaSeleccionada === cat"
+            [class.btn-outline-dark]="categoriaSeleccionada !== cat">
+            {{ cat }}
+          </button>
         }
+      </div>
     </div>
+  </div>
+
+  <div class="row g-4">
+    <aside class="col-12 col-md-4 col-lg-3 border-end">
+      <lateralBar></lateralBar>
+    </aside>
+
+<main class="col-12 col-md-8 col-lg-9">
+  <div class="d-flex flex-column gap-3">
+    @for (articulo of articles(); track articulo.id) {
+      <articlecard
+        [article]="articulo"
+        (aiSummary)="onAISummary($event)"
+        (readFull)="onReadFull($event)"
+        (subscriptionChanged)="onSubscriptionChanged($event)"> 
+      </articlecard>
+    }
+  </div>
+</main>
+  </div>
 </div>

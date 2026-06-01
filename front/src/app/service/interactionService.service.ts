@@ -10,7 +10,7 @@ export class InteractionService {
  
   private API_URL = 'http://localhost:8080/api/v1/interactions';
  
-  postInteraction(category: string, interactionType: string) {
+  postInteraction(category: string, interactionType: string, externalArticleId: string) {
     const email = localStorage.getItem('email');
     const pass = localStorage.getItem('password');
  
@@ -20,7 +20,8 @@ export class InteractionService {
         password: pass,
       },
       articleCategory: category,
-      interactionCategory: interactionType,
+      externalArticleId: externalArticleId,
+      interactionCategory: interactionType
     };
     return this.http.post(this.API_URL, body).pipe(catchError(this.handleError));
   }

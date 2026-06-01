@@ -41,6 +41,12 @@
             La contraseña es requerida.
           </div>
         }
+
+        @if (password.hasError('minlength') && (password.dirty || password.touched)) {
+          <div class="alert alert-danger mt-2">
+            Al menos 8 caracteres.
+          </div>
+        }
       </div>
 
       <button type="submit" class="btn btn-dark w-100">

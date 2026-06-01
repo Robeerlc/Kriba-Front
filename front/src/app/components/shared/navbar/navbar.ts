@@ -35,4 +35,8 @@ export class NavbarComponent {
     this.loginSub?.unsubscribe();
   }
 
+  get isRoute() {
+    return this.router.url === '/' || this.router.url === '/register';
+  }
+
 }

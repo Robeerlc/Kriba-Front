@@ -4,9 +4,10 @@ import { FeedService } from '../../../service/feedService.service';
 import { Favorite } from '../../../interfaces/favorite.interface';
 import { Router } from '@angular/router';
 import { InteractionService } from '../../../service/interactionService.service';
-import { ErrorHttpService } from '../../../service/errorHttpService.service';
-import { catchError } from 'rxjs';
 import { ModelIAService } from '../../../service/modelIA.service';
+import { CancelFavoriteI } from '../../../interfaces/cancelFavorite.interface';
+import { Subscribe } from '../../../interfaces/subscribe.interface';
+
 
 @Component({
     selector: 'articlecard',
@@ -16,12 +17,12 @@ import { ModelIAService } from '../../../service/modelIA.service';
     styleUrls: ['./articlecard.css']
 })
 export class ArticleCardComponent {
+    // AL SER ANY PUEDP PUEDO DECLARAR CUALQUIER PROPIEDAD
     @Input() article: any;
     @Output() aiSummary = new EventEmitter<string>();
     @Output() readFull = new EventEmitter<string>();
     private modelService = inject(ModelIAService);
     private interactionService = inject(InteractionService)
-    private errorHttpService = inject(ErrorHttpService)
     private feedService = inject(FeedService);
     private router = inject(Router);
 
@@ -30,18 +31,15 @@ export class ArticleCardComponent {
     }
     
     sendInteracionClick():void{
-        this.interactionService.postInteraction(this.article.category, 'CLICK');
+        this.interactionService.postInteraction(this.article.category, this.article.id, 'CLICK');
     }
     
-    sendInteracitionSave(): void{
-        this.interactionService.postInteraction(this.article.category, 'SAVE')    
-        .pipe(catchError((err) => this.errorHttpService.handleError(err)));
-    }
     
     onReadFull(event: Event) {
         event.preventDefault();
         this.feedService.setArticle(this.article);
         this.router.navigate(['/new']);
+        this.sendInteracionClick();
     }
 
     /***************************************************************************************************************************************************************************/
@@ -54,9 +52,11 @@ export class ArticleCardComponent {
 
     favorite(): void {
         if (this.article.isFavorite) {
+            this.cancelFavoriteM();
+            //console.log("ya esta guardado en favoritos");
             return; 
         }
-
+        this.sendInteracionClick();
         const email = localStorage.getItem('email') || '';
         const password = localStorage.getItem('password') || '';
 
@@ -65,7 +65,7 @@ export class ArticleCardComponent {
         const favoritePayload: Favorite = {
             loginRequest: { email, password },
             savedNew: {
-            externalArticleId: this.article.externalId ?? '',
+            externalArticleId: this.article.id,
             title: this.article.title,
             url: this.article.url,
             category: this.article.category,
@@ -88,18 +88,22 @@ export class ArticleCardComponent {
         });
     }
 
+    @Output() subscriptionChanged = new EventEmitter<string>();
+
     subscribe(): void {
         if (this.article.isSubscribed) {
+            console.log("quitar sub futuro");
             return; 
         }
 
+        this.sendInteracionClick();
         const email = localStorage.getItem('email') || '';
         const password = localStorage.getItem('password') || '';
 
-        const subscribePayload = {
+        const subscribePayload: Subscribe = {
             loginRequest: { email, password },
-             externalSourceId: this.article.source?.id,
-        sourceName: this.article.source?.name
+            externalSourceId: this.article.source?.id,
+            sourceName: this.article.source?.name
         };
 
         this.article.isSubscribed = !this.article.isSubscribed;
@@ -107,6 +111,7 @@ export class ArticleCardComponent {
         this.feedService.subscribe(subscribePayload).subscribe({
             next: () => {
                 console.log('Suscripción correcta');
+                this.subscriptionChanged.emit(this.article.source.name);
             },
             error: (err) => {
                 console.error('Error suscripción', err);
@@ -115,6 +120,42 @@ export class ArticleCardComponent {
         });
     }
 
+    like(): void{
+        this.favorite();
+        //this.sendInteracitionSave()
+    }
 
+    get isSaved() {
+        return this.router.url === '/saved';
+    }
+
+    @Output() favoriteRemoved = new EventEmitter<string>();
+    cancelFavoriteM(): void {
+        if (this.router.url !== '/saved') {
+            console.log("quitar me gusta futuro");
+            return;
+        }
+        const email = localStorage.getItem('email') || '';
+        const password = localStorage.getItem('password') || '';
+
+        const externalId = this.article.externalArticleId;
+
+        const cancelPayload: CancelFavoriteI = {
+            loginRequest: { email, password },
+            externalArticleId: externalId
+        };
+
+        this.feedService.cancelFavorite(cancelPayload).subscribe({
+            next: () => {
+            console.log('Favorito eliminado correctamente');
+            this.article.isFavorite = false;
+            //window.location.reload();
+            this.favoriteRemoved.emit(externalId);
+            },
+            error: (err) => {
+            console.error('Error al eliminar favorito', err);
+            }
+        });
+    }
 
 }

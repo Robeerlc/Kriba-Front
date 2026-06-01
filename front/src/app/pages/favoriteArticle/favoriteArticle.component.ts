@@ -32,4 +32,10 @@ export class FavoriteAricle implements OnInit {
       error: (err) => console.error('Error cargando favoritos:', err)
     });
   }
+
+  onFavoriteRemoved(idEliminado: string): void {
+    this.favorites.update(listaActual => 
+      listaActual.filter(fav =>fav.externalArticleId !== idEliminado)
+    );
+  }
 }

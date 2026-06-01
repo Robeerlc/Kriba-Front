@@ -3,7 +3,9 @@
     <div class="article-header">
 
       <div class="header-left">
-          <span>{{ article.category }} | <strong>{{ article.source?.name }}</strong></span>
+
+        @if (!isSaved) {
+          <span>{{ article.category.toUpperCase() }} | <strong>{{ article.source?.name.toUpperCase()  }}</strong></span>
           <button class="btn-subscribe" (click)="subscribe()">
             @if (article.isSubscribed) {
               🔔 Suscribito         
@@ -11,6 +13,8 @@
               🔕 No subscrito
             }
           </button>
+        }
+
       </div>
       <div class="article-date">
         {{ article.publishedAt | date }}
@@ -21,15 +25,14 @@
     <p class="article-description">{{ article.description }}</p>
 
     <div class="article-actions">
-      @if (!article.isFavoritePage) {
-        <button class="btn-heart" (click)="favorite()" (click)="sendInteracitionSave()">
+        <button class="btn-heart" (click)="like()">
           @if (article.isFavorite) {
             <span class="heart-icon active">♥</span>
           } @else {
             <span class="heart-icon">♡</span>
           }
         </button>
-      }
+      
 
       <button class="read-full-btn"  (click)="onSummarize(article)">
         Resumen IA

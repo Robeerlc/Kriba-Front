@@ -55,9 +55,9 @@ export class ModelIA {
     });
   }
 
-  sendInteracition(articleCat: string, interacition: string): void{
+  /*sendInteracition(articleCat: string, interacition: string): void{
     this.interactionService.postInteraction(this.data.category, 'SUMMARIZE').pipe(catchError((err) => this.errorHttpService.handleError(err)))
-  }
+  }*/
   onReadFull(event: Event) {
     event.preventDefault();
     this.feedService.setArticle(this.data.article);

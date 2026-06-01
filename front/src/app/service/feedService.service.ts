@@ -9,7 +9,7 @@ import { favoriteArticle } from '../interfaces/favoriteArticle.interface';
 import { Subscribe } from '../interfaces/subscribe.interface';
 import { SubscriptionResponse } from '../interfaces/subscriptionList.interface';
 import { ErrorHttpService } from './errorHttpService.service';
-import { InteractionService } from './interactionService.service';
+import { CancelFavoriteI } from '../interfaces/cancelFavorite.interface';
  
 @Injectable({
   providedIn: 'root',
@@ -20,8 +20,10 @@ export class FeedService {
   private API_URL = 'http://localhost:8080/api/v1/feed';
   private API_URL_Favorites = "http://localhost:8080/api/v1/bookmarks";
   private API_URL_Favorites_List = "http://localhost:8080/api/v1/bookmarks/list";
+   private API_URL_CancelFavorites = "http://localhost:8080/api/v1/bookmarks/unsave";
   private API_URL_Sub = "http://localhost:8080/api/v1/subscriptions";
   private API_URL_Sub_List = "http://localhost:8080/api/v1/subscriptions/list";
+  private API_URL_Sub_Cancel = "http://localhost:8080/api/v1/subscriptions/unsubscribe";
 
   private selectedNew: Article | null = null;
 
@@ -73,6 +75,16 @@ export class FeedService {
   subscriptionList(user: LoginInterface): Observable<SubscriptionResponse> {
     return this.http.post<SubscriptionResponse>(this.API_URL_Sub_List, user)
     .pipe(catchError((err) => this.errorHttpService.handleError(err)));
+  }
+
+  cancelSubscribe(subscribe: Subscribe): Observable<void>{
+    return this.http.post<void>(this.API_URL_Sub_Cancel, subscribe)
+    .pipe(catchError((err) => this.errorHttpService.handleError(err)));;
+  }
+
+  cancelFavorite(cancelFavoriteI: CancelFavoriteI): Observable<void>{
+    return this.http.post<void>(this.API_URL_CancelFavorites, cancelFavoriteI)
+    .pipe(catchError((err) => this.errorHttpService.handleError(err)));;
   }
 
 }

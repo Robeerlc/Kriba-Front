@@ -41,7 +41,7 @@
       }
     </div>
 
-    <div class="mb-3">
+<div class="mb-3">
       <label for="password" class="form-label">Contraseña</label>
       <input id="password" type="password" class="form-control" formControlName="password" />
 
@@ -50,15 +50,27 @@
           La contraseña es requerida.
         </div>
       }
+      
+      @if (password.hasError('minlength') && (password.dirty || password.touched)) {
+        <div class="alert alert-danger mt-2">
+          Al menos 8 caracteres.
+        </div>
+      }
     </div>
 
     <div class="mb-3">
       <label for="repeatPassword" class="form-label">
         Repetir contraseña
       </label>
-
       <input id="repeatPassword" type="password" class="form-control" formControlName="repeatPassword" />
-      @if (repeatPassword.value && password.value != repeatPassword.value) {
+      
+      @if (repeatPassword.hasError('required') && (repeatPassword.dirty || repeatPassword.touched)) {
+        <div class="alert alert-danger mt-2">
+          Debe repetir la contraseña.
+        </div>
+      }
+
+      @if (repeatPassword.value && password.value !== repeatPassword.value && (repeatPassword.dirty || repeatPassword.touched)) {
         <div class="alert alert-danger mt-2">
           Las contraseñas no coinciden.
         </div>
