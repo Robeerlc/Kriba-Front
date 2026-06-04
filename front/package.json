@@ -2,9 +2,9 @@
   "name": "kriba",
   "version": "0.0.0",
   "scripts": {
-    "ng": "ng",
+    "build": "ng build && mv dist/kriba/browser ./browser",
     "start": "ng serve",
-    "build": "ng build",
+    "ng": "ng",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:kriba": "node dist/kriba/server/server.mjs"

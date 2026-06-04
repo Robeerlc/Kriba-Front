@@ -22,11 +22,18 @@ export class Login {
   constructor(private fb: FormBuilder, private router: Router, private loginService: LoginService) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
+<<<<<<< Updated upstream
       password: ['', Validators.required]
     });
   }
 
   // Para abreviar en el HTML
+=======
+      password: ['', [Validators.required, Validators.minLength(8)]]
+    });
+  }
+
+>>>>>>> Stashed changes
   get email() {
     return this.loginForm.controls['email'];
   }
@@ -36,6 +43,7 @@ export class Login {
 
   login(): void {
     if (this.loginForm.invalid) {
+<<<<<<< Updated upstream
       this.loginForm.markAllAsTouched(); //Muestra los errores
       return;
     }
@@ -44,6 +52,14 @@ export class Login {
     this.loginService.login(credentials).subscribe({
       next: (userData) => {
         console.log('Usuario autenticado:', userData);
+=======
+      this.loginForm.markAllAsTouched();
+      return;
+    }
+    const credentials = this.loginForm.value as LoginInterface;
+    this.loginService.login(credentials).subscribe({
+      next: (userData) => {
+>>>>>>> Stashed changes
         this.loginError = "";
         this.router.navigateByUrl('/home');
       },

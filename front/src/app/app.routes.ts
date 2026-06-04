@@ -6,6 +6,10 @@ import { FavoriteAricle } from './pages/favoriteArticle/favoriteArticle.componen
 import { NewPageComponent } from './pages/newsPage/newPage.component';
 import { StatsPageComponent } from './pages/statisticsPage/statisticsPage.component';
 import { Subscriptionpage } from './pages/subscriptionPage/subscriptionpage';
+<<<<<<< Updated upstream
+=======
+import { UserPageComponent } from './pages/userPage/userPage.component';
+>>>>>>> Stashed changes
 
 export const routes: Routes = [
 
@@ -39,5 +43,13 @@ export const routes: Routes = [
     path: 'subs',
     component: Subscriptionpage,
   },
+<<<<<<< Updated upstream
   
+=======
+  {
+    path:'user',
+    component:UserPageComponent
+  }
+
+>>>>>>> Stashed changes
 ];

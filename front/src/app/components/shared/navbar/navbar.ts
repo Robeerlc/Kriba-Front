@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { RouterLink, RouterLinkActive } from "@angular/router";
+import { RouterLink, RouterLinkActive } from '@angular/router';
 import { LoginService } from '../../../service/credentialsService.service';
+import { CategoryService } from '../../../service/category.service';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -13,11 +14,32 @@ import { CommonModule } from '@angular/common';
 })
 export class NavbarComponent {
   userLoginOn: boolean = false;
-                                   // Almacena la subscripcion
-  private loginSub?: Subscription; // Evita fugas de memoria, despues de cerrar la sesion
-                                   // Varias subscripciones activas
+  categorias = [
+    'mixed',
+    'general',
+    'world',
+    'business',
+    'technology',
+    'entertainment',
+    'sports',
+    'science',
+  ];
 
-  constructor(private loginService: LoginService, private router: Router){};
+  private loginSub?: Subscription;
+
+  constructor(
+    private loginService: LoginService,
+    private router: Router,
+    private categoryService: CategoryService
+  ) {}
+
+  selectCategory(category: string): void {
+    this.categoryService.setCategory(category);
+  }
+
+  get selectedCategory(): string {
+    return this.categoryService.selectedCategory;
+  }
 
   ngOnInit(): void {
     this.loginSub = this.loginService.userLoginOn.subscribe({
@@ -35,4 +57,11 @@ export class NavbarComponent {
     this.loginSub?.unsubscribe();
   }
 
+<<<<<<< Updated upstream
+=======
+  get isRoute() {
+    return this.router.url === '/' || this.router.url === '/register';
+  }
+
+>>>>>>> Stashed changes
 }

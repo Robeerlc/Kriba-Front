@@ -16,6 +16,23 @@
   background-color: #fcfcfd;
 }
 
+@media (max-width: 767px) {
+  .app-layout {
+    flex-direction: column;
+  }
+
+  .sidebar-section {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid #eef2f6;
+    margin-bottom: 1rem;
+  }
+
+  .main-feed {
+    padding: 1.25rem;
+  }
+}
+
 .main-feed h2 {
   font-size: 1.8rem;
   font-weight: 700;

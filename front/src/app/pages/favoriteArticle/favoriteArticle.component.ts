@@ -12,7 +12,11 @@ import { LateralBarComponent } from "../../components/shared/lateralBar/lateralB
 })
 export class FavoriteAricle implements OnInit {
 
+<<<<<<< Updated upstream
   favorites = signal<any[]>([]); 
+=======
+  favorites = signal<any[]>([]);
+>>>>>>> Stashed changes
   // No constructor vacio
   // No duplico el nombre del servicio como en el constructor
   // Se puede usar dentro de una funcion
@@ -24,6 +28,7 @@ export class FavoriteAricle implements OnInit {
   ngOnInit() {
     const email = localStorage.getItem('email') || '';
     const password = localStorage.getItem('password') || '';
+<<<<<<< Updated upstream
     
     const userPayload: LoginInterface = { email, password };
 
@@ -31,5 +36,22 @@ export class FavoriteAricle implements OnInit {
       next: (data) => this.favorites.set(data),
       error: (err) => console.error('Error cargando favoritos:', err)
     });
+=======
+
+    const userPayload: LoginInterface = { email, password };
+
+    this.feedService.favoriteList(userPayload).subscribe({
+      next: (data:any) => {
+        this.favorites.set(data.content || []);
+      },
+      error: (err) => console.error('Error cargando favoritos:', err)
+    });
+}
+
+  onFavoriteRemoved(idEliminado: string): void {
+    this.favorites.update(listaActual =>
+      listaActual.filter(fav =>fav.externalArticleId !== idEliminado)
+    );
+>>>>>>> Stashed changes
   }
 }

@@ -1,0 +1,35 @@
+/* Basic navbar responsive styles */
+.navbar { padding: 0.5rem 1rem; }
+.navbar-brand { font-size: 1.25rem; letter-spacing: 0.04em; }
+.navbar .nav-link { padding: 0.45rem 0.75rem; }
+
+@media (max-width: 767px) {
+  .navbar { padding: 0.35rem 0.6rem; }
+  .navbar-brand { font-size: 1rem; }
+  .navbar-toggler { border: none; }
+  .navbar-nav { gap: 0.5rem; }
+  .navbar-collapse { width: 100%; }
+
+  /* Make category buttons scrollable horizontally on small screens */
+  .navbar-nav .nav-item.d-flex {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 0.35rem 0.25rem;
+  }
+
+  .navbar-nav .nav-item.d-flex .btn {
+    margin: 0 .25rem;
+    white-space: nowrap;
+    font-size: 0.8rem;
+  }
+
+  .navbar-nav .nav-item.d-flex::-webkit-scrollbar { display: none; }
+
+  /* Show collapsed menu by default on small screens so categories are visible */
+  .navbar-collapse.collapse { display: block !important; height: auto !important; visibility: visible !important; }
+  .navbar .navbar-nav { flex-direction: row; align-items: center; }
+}
+
+@media (min-width: 768px) {
+  .navbar { padding: 0.6rem 1rem; }
+}

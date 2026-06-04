@@ -136,14 +136,14 @@
 }
 
 .heart-icon {
-  font-size: 32px; 
-  color: #666;    
+  font-size: 32px;
+  color: #666;
   user-select: none;
   transition: color 0.2s ease;
 }
 
 .heart-icon.active {
-  color: #ff4b4b; 
+  color: #ff4b4b;
 }
 
 .read-full-btn {
@@ -160,3 +160,26 @@
   transition: background 0.18s;
 }
 .read-full-btn:hover { background: #1a3a5c; }
+
+/* Mobile adjustments: stack card content */
+@media (max-width: 767px) {
+  .article-card {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+    padding: 14px;
+  }
+
+  .article-image {
+    width: 100%;
+    height: auto;
+  }
+
+  .article-header { flex-direction: column; align-items: flex-start; gap: 8px; }
+
+  .article-title { font-size: 1.15rem; }
+
+  .article-actions { flex-wrap: wrap; justify-content: flex-start; gap: 8px; }
+
+  .read-full-btn { width: 100%; }
+}
