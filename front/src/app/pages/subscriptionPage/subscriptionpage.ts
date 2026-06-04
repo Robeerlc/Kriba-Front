@@ -5,10 +5,7 @@ import { FeedService } from '../../service/feedService.service';
 import { LoginInterface } from '../../interfaces/loginInterface';
 import { SubscriptionItem } from '../../interfaces/subscriptionList.interface';
 import { LateralBarComponent } from "../../components/shared/lateralBar/lateralBarComponent";
-<<<<<<< Updated upstream
-=======
 import { Subscribe } from '../../interfaces/subscribe.interface';
->>>>>>> Stashed changes
 
 @Component({
   selector: 'app-subscriptionpage',
@@ -18,13 +15,7 @@ import { Subscribe } from '../../interfaces/subscribe.interface';
   styleUrls: ['./subscriptionpage.css'],
 })
 export class Subscriptionpage implements OnInit {
-<<<<<<< Updated upstream
-
   subscriptions = signal<SubscriptionItem[]>([]);
-
-=======
-  subscriptions = signal<SubscriptionItem[]>([]);
->>>>>>> Stashed changes
   private feedService = inject(FeedService);
 
   ngOnInit(): void {
@@ -39,21 +30,12 @@ export class Subscriptionpage implements OnInit {
 
     this.feedService.subscriptionList(userPayload).subscribe({
       next: (data) => {
-<<<<<<< Updated upstream
-        console.log(data);
-=======
->>>>>>> Stashed changes
         this.subscriptions.set(data.subscriptions);
       },
       error: (err) => {
         console.error('Error cargando subscripciones', err);
       }
     });
-<<<<<<< Updated upstream
-
-  }
-}
-=======
   }
 
     cancelSubscribe(sub: SubscriptionItem): void {
@@ -82,4 +64,3 @@ export class Subscriptionpage implements OnInit {
       });
     }
 }
->>>>>>> Stashed changes

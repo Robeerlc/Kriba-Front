@@ -1,11 +1,4 @@
 import { Article } from "./article.interface"
-<<<<<<< Updated upstream
-
-export interface Feed{
-  totalArticles: number
-  articles: Article[]
-}
-=======
  
 export interface Feed{
   totalArticles: number
@@ -16,4 +9,3 @@ export interface Feed{
 }
  
  
->>>>>>> Stashed changes

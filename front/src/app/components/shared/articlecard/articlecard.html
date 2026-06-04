@@ -3,13 +3,9 @@
     <div class="article-header">
 
       <div class="header-left">
-<<<<<<< Updated upstream
-          <span>{{ article.category }} | <strong>{{ article.source?.name }}</strong></span>
-=======
 
         @if (!isSaved) {
           <span>{{ article.category.toUpperCase() }} | <strong>{{ article.source?.name.toUpperCase()  }}</strong></span>
->>>>>>> Stashed changes
           <button class="btn-subscribe" (click)="subscribe()">
             @if (article.isSubscribed) {
               🔔 Suscribito         
@@ -17,11 +13,8 @@
               🔕 No subscrito
             }
           </button>
-<<<<<<< Updated upstream
-=======
         }
 
->>>>>>> Stashed changes
       </div>
       <div class="article-date">
         {{ article.publishedAt | date }}
@@ -32,23 +25,14 @@
     <p class="article-description">{{ article.description }}</p>
 
     <div class="article-actions">
-<<<<<<< Updated upstream
-      @if (!article.isFavoritePage) {
-        <button class="btn-heart" (click)="favorite()" (click)="sendInteracitionSave()">
-=======
         <button class="btn-heart" (click)="like()">
->>>>>>> Stashed changes
           @if (article.isFavorite) {
             <span class="heart-icon active">♥</span>
           } @else {
             <span class="heart-icon">♡</span>
           }
         </button>
-<<<<<<< Updated upstream
-      }
-=======
       
->>>>>>> Stashed changes
 
       <button class="read-full-btn"  (click)="onSummarize(article)">
         Resumen IA

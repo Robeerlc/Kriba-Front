@@ -10,17 +10,10 @@ import { ModelIA } from '../components/shared/modelIA/modelIA';
 })
 export class ModelIAService {
   private http = inject(HttpClient);
-<<<<<<< Updated upstream
-  private API_URL = 'http://localhost:8080/api/v1/ai/summarize';
-  private readonly _dialog = inject(MatDialog);
-
-  getSummary(textContent: string, articleUrl : string, category:string): Observable<Summary> {
-=======
   private API_URL = 'https://kriba-d08ba5-193-70-44-51.sslip.io/api/v1/ai/summarize';
   private readonly _dialog = inject(MatDialog);
 
   getSummary(textContent: string, articleUrl: string, category: string, externalId: string): Observable<Summary> {
->>>>>>> Stashed changes
     if (typeof localStorage == 'undefined') {
       return throwError(() => new Error('No hay sesion'));
     }
@@ -33,34 +26,13 @@ export class ModelIAService {
       },
       textContent: textContent,
       articleUrl: articleUrl,
-<<<<<<< Updated upstream
-      category: category
-=======
       category: category,
       externalArticleId: externalId
->>>>>>> Stashed changes
     };
 
     return this.http.post<Summary>(this.API_URL, body).pipe(catchError(this.handleError));
   }
 
-<<<<<<< Updated upstream
-openModel(articleTitle: string, articleContent: string, articleUrl: string, articleCategory:string, article:any) {
-  this._dialog.open(ModelIA, {
-    width: '400px',
-    maxWidth: '90vw',
-    position: { right: '0', top: '0' },
-    panelClass: 'slide-in-modal',
-    hasBackdrop: false,
-    autoFocus: false,
-    data: {
-      title: articleTitle,
-      content: articleContent,
-      url: articleUrl,
-      category: articleCategory,
-      article: article
-    }
-=======
   openModel(articleTitle: string, articleContent: string, articleUrl: string, articleCategory:string, article:any ) {
     this._dialog.open(ModelIA, {
       width: '400px',
@@ -77,7 +49,6 @@ openModel(articleTitle: string, articleContent: string, articleUrl: string, arti
         article: article,
 
       }
->>>>>>> Stashed changes
   });
 }
 

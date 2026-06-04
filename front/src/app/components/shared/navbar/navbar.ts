@@ -35,11 +35,8 @@ export class NavbarComponent {
     this.loginSub?.unsubscribe();
   }
 
-<<<<<<< Updated upstream
-=======
   get isRoute() {
     return this.router.url === '/' || this.router.url === '/register';
   }
 
->>>>>>> Stashed changes
 }

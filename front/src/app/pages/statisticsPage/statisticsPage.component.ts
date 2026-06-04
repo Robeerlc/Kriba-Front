@@ -3,20 +3,13 @@ import { CommonModule } from '@angular/common';
 import { StatsService } from '../../service/stats.service';
 import { StatsChart } from '../../components/shared/chart/statsChart/statsChart';
 import { CategoryStats } from '../../interfaces/categoryStats.interface';
-<<<<<<< Updated upstream
-=======
 import { InteractionService } from '../../service/interactionService.service';
 import { LateralBarComponent } from "../../components/shared/lateralBar/lateralBarComponent";
->>>>>>> Stashed changes
 
 @Component({
   selector: 'statistics',
   standalone: true,
-<<<<<<< Updated upstream
-  imports: [CommonModule, StatsChart],
-=======
   imports: [CommonModule, StatsChart, LateralBarComponent],
->>>>>>> Stashed changes
   templateUrl: './statisticsPage.component.html',
 })
 export class StatsPageComponent {

@@ -19,11 +19,7 @@ export class Register {
     this.registerForm=this.fb.group({
       username: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-<<<<<<< Updated upstream
-      password: ['', Validators.required],
-=======
       password: ['', [Validators.required, Validators.minLength(8)]],
->>>>>>> Stashed changes
       repeatPassword: ['', Validators.required]
     })
   }
@@ -43,11 +39,7 @@ export class Register {
 
   register(): void{
     if (this.registerForm.invalid) {
-<<<<<<< Updated upstream
-        this.registerForm.markAllAsTouched(); 
-=======
         this.registerForm.markAllAsTouched();
->>>>>>> Stashed changes
         return;
     }
 
@@ -61,11 +53,7 @@ export class Register {
         next: (userData) => {
           console.log('Usuario registrado:', userData);
           this.registerError = "";
-<<<<<<< Updated upstream
-          this.router.navigateByUrl('/home');
-=======
           this.router.navigateByUrl('/');
->>>>>>> Stashed changes
         },
         error: (err) => {
           console.error(err);

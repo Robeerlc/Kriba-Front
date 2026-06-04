@@ -6,23 +6,6 @@
     <div class="main-feed">
         <h2>Mis Favoritos</h2>
 
-<<<<<<< Updated upstream
-        @for (fav of favorites(); track fav.id) {
-            <articlecard [article]="{ 
-                id: fav.id, 
-                externalId: fav.externalArticleId, 
-                title: fav.title, 
-                url: fav.url,
-                image: fav.image,
-                description: fav.description,
-                content: fav.content,
-                category: 'Favoritos',
-                publishedAt: '',
-                source: { id: '', name: 'Guardado', url: '' },
-                isFavoritePage: true
-            }"></articlecard>
-        } @empty {
-=======
         @for (fav of favorites(); track fav.externalArticleId) {
         <articlecard [article]="{
             id: fav.id,
@@ -40,14 +23,9 @@
         (favoriteRemoved)="onFavoriteRemoved($event)">
         </articlecard>
         }@empty {
->>>>>>> Stashed changes
             <div class="alert alert-info">
                 No tienes ningún artículo guardado en favoritos todavía.
             </div>
         }
     </div>
-<<<<<<< Updated upstream
 </div>
-=======
-</div>
->>>>>>> Stashed changes

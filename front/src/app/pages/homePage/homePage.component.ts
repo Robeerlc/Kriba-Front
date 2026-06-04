@@ -1,38 +1,16 @@
-<<<<<<< Updated upstream
-import { Component, OnInit, signal, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { LateralBarComponent } from '../../components/shared/lateralBar/lateralBarComponent';
-import { ArticleCardComponent } from '../../components/shared/articlecard/articlecard';
-import { FeedService } from '../../service/feedService.service';
-import { Article } from '../../interfaces/article.interface';
-=======
 import { Component, signal, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LateralBarComponent } from '../../components/shared/lateralBar/lateralBarComponent';
 import { FeedService } from '../../service/feedService.service';
 import { Article } from '../../interfaces/article.interface';
 import { ArticleCardComponent } from '../../components/shared/articlecard/articlecard';
->>>>>>> Stashed changes
 
 @Component({
   selector: 'app-homepage',
   standalone: true,
   imports: [CommonModule, LateralBarComponent, ArticleCardComponent],
   templateUrl: './homePage.component.html',
-<<<<<<< Updated upstream
-  styleUrls: ['./homePage.component.css']
-})
-export class HomePageComponent {
-  articles = signal<Article[]>([]);
-  private feedService = inject(FeedService);
-
-  constructor() {
-    this.feedService.getFeed().subscribe({
-      next: (data) => this.articles.set(data.articles),
-      error: (err) => console.error(err)
-    });
-=======
-  styleUrls: ['./homePage.component.css'],
+  styleUrls: ['./homepage.component.css'],
 })
 export class HomePageComponent {
   visibleArticles = signal<Article[]>([]);
@@ -72,7 +50,6 @@ export class HomePageComponent {
   cambiarCategoria(nuevaCategoria: string) {
     this.categoriaSeleccionada = nuevaCategoria;
     this.getFeed(nuevaCategoria);
->>>>>>> Stashed changes
   }
 
   onAISummary(id: string) {
@@ -82,8 +59,6 @@ export class HomePageComponent {
   onReadFull(id: string) {
     alert('Leer artículo completo: ' + id);
   }
-<<<<<<< Updated upstream
-=======
 
   onSubscriptionChanged(sourceName: string) {
     const articulosActualizados = this.visibleArticles().map((articulo) => {
@@ -160,5 +135,4 @@ export class HomePageComponent {
       }
     }
   }
->>>>>>> Stashed changes
 }

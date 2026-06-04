@@ -1,16 +1,3 @@
-<<<<<<< Updated upstream
-import { Component } from "@angular/core";
-
-
-
-
-@Component({
-  templateUrl: 'userPage.component.html'
-})
-
-export class UserPageComponent{
-
-=======
 import { Component, inject, signal } from '@angular/core';
 import { LateralBarComponent } from '../../components/shared/lateralBar/lateralBarComponent';
 import { UserService } from '../../service/user.service';
@@ -69,5 +56,4 @@ export class UserPageComponent {
     localStorage.clear();
     this.router.navigate(['/'])
   }
->>>>>>> Stashed changes
 }

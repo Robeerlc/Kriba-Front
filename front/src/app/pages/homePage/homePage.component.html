@@ -1,20 +1,3 @@
-<<<<<<< Updated upstream
-<div style="display: flex;">
-    <div style="width: 280px; border-right: 1px solid #eee;">
-        <lateralBar></lateralBar>
-    </div>
-
-    <div style="flex: 1; padding: 20px;">
-        <!--Indice unico porque el back envia la misma noticias a veces-->
-        @for (articulo of articles(); track $index) {
-            <articlecard
-                [article]="articulo"
-                (aiSummary)="onAISummary($event)"
-                (readFull)="onReadFull($event)">
-            </articlecard>
-        }
-    </div>
-=======
 <div class="container-fluid mt-4">
   <div class="row mb-4">
     <div class="col-12">
@@ -69,5 +52,4 @@
       </div>
     </main>
   </div>
->>>>>>> Stashed changes
 </div>

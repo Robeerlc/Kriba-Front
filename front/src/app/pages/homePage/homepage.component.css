@@ -15,11 +15,8 @@
     background-color: #fcfcfd;
     padding: 2rem;
     max-width: calc(100% - 280px);
-<<<<<<< Updated upstream
-=======
     overflow-y: auto;
     height: 100vh;
->>>>>>> Stashed changes
 
     .digest-header {
         margin-bottom: 2rem;
@@ -165,8 +162,6 @@
     }
 }
 
-<<<<<<< Updated upstream
-=======
 .spinner {
     width: 40px;
     height: 40px;
@@ -182,7 +177,6 @@
     100% { transform: rotate(360deg); }
 }
 
->>>>>>> Stashed changes
 @media (max-width: 860px) {
     .app-layout {
         flex-direction: column;
