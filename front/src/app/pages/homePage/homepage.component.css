@@ -187,3 +187,13 @@
         padding: 1.5rem;
     }
 }
+
+/* Additional small-screen tweaks to account for fixed compact sidebar */
+@media (max-width: 767px) {
+    .main-feed {
+        margin-left: 88px;
+        padding: 1rem;
+        height: auto;
+        overflow: visible;
+    }
+}

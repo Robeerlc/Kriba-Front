@@ -2,18 +2,22 @@ import { Component, signal, inject, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LateralBarComponent } from '../../components/shared/lateralBar/lateralBarComponent';
 import { FeedService } from '../../service/feedService.service';
+import { CategoryService } from '../../service/category.service';
 import { Article } from '../../interfaces/article.interface';
 import { ArticleCardComponent } from '../../components/shared/articlecard/articlecard';
 import { Subscription } from 'rxjs';
+
+@Component({
   selector: 'app-homepage',
   imports: [CommonModule, LateralBarComponent, ArticleCardComponent],
   templateUrl: './homePage.component.html',
   styleUrls: ['./homepage.component.css'],
 })
-export class HomePageComponent {
+export class HomePageComponent implements OnInit, OnDestroy {
   visibleArticles = signal<Article[]>([]);
 
   private feedService = inject(FeedService);
+  private categoryService = inject(CategoryService);
 
   currentPage = 0;
   private currentCategory?: string;
@@ -23,17 +27,8 @@ export class HomePageComponent {
   isLoading = false;
   hasMore = true;
 
-  categorias = [
-    'mixed',
-    'general',
-    'world',
-    'business',
-    'technology',
-    'entertainment',
-    'sports',
-    'science',
-  ];
   categoriaSeleccionada: string = 'mixed';
+  private categorySub?: Subscription;
 
   constructor() {
     if (typeof localStorage !== 'undefined') {
@@ -42,7 +37,21 @@ export class HomePageComponent {
         this.visibleArticles.set(JSON.parse(cached));
       }
     }
-    this.loadMoreArticles();
+  }
+
+  ngOnInit(): void {
+    this.categorySub = this.categoryService.selectedCategory$.subscribe((category) => {
+      if (this.categoriaSeleccionada !== category) {
+        this.categoriaSeleccionada = category;
+        this.getFeed(category);
+      } else if (this.visibleArticles().length === 0) {
+        this.getFeed(category);
+      }
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.categorySub?.unsubscribe();
   }
 
   cambiarCategoria(nuevaCategoria: string) {
@@ -68,6 +77,7 @@ export class HomePageComponent {
   }
 
   getFeed(category?: string) {
+    this.categoriaSeleccionada = category ?? 'mixed';
     const categoriaParam = category === 'mixed' ? undefined : category;
     this.currentCategory = categoriaParam;
     this.currentPage = 0;
