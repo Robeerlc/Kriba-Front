@@ -1,13 +1,11 @@
-import { Component, signal, inject } from '@angular/core';
+import { Component, signal, inject, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LateralBarComponent } from '../../components/shared/lateralBar/lateralBarComponent';
 import { FeedService } from '../../service/feedService.service';
 import { Article } from '../../interfaces/article.interface';
 import { ArticleCardComponent } from '../../components/shared/articlecard/articlecard';
-
-@Component({
+import { Subscription } from 'rxjs';
   selector: 'app-homepage',
-  standalone: true,
   imports: [CommonModule, LateralBarComponent, ArticleCardComponent],
   templateUrl: './homePage.component.html',
   styleUrls: ['./homepage.component.css'],
@@ -48,8 +46,7 @@ export class HomePageComponent {
   }
 
   cambiarCategoria(nuevaCategoria: string) {
-    this.categoriaSeleccionada = nuevaCategoria;
-    this.getFeed(nuevaCategoria);
+    this.categoryService.setCategory(nuevaCategoria);
   }
 
   onAISummary(id: string) {

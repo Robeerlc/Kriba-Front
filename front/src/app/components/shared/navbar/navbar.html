@@ -1,5 +1,4 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-4">
-
   <a class="navbar-brand fw-bold">KRIBA</a>
 
   <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
@@ -21,15 +20,27 @@
         </li>
       }@else {
         <li class="nav-item">
-          <a class="nav-link" routerLink="/" routerLinkActive="active">Profile</a>
+      @if(!isRoute){
+        <li class="nav-item d-flex flex-wrap justify-content-center gap-2 flex-grow-1">
+          @for (cat of categorias; track cat) {
+            <button
+              type="button"
+              class="btn btn-sm rounded-pill px-3 py-1"
+              [class.btn-light]="selectedCategory === cat"
+              [class.btn-outline-light]="selectedCategory !== cat"
+              (click)="selectCategory(cat)"
+            >
+              {{ cat }}
+            </button>
+          }
         </li>
-        <!--<li class="nav-item">
-          <a class="nav-link" routerLink="/" routerLinkActive="active">Iniciar Sesion</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/register" routerLinkActive="active">Register</a>
-        </li>-->
       }
+      <li class="nav-item">
+        @if (userLoginOn) {
+          <a class="nav-link" href="#" (click)="onLogout()">Cerrar Sesión</a>
+          <a class="nav-link" routerLink="/" routerLinkActive="active">Profile</a>
+        }
+      </li>
     </ul>
   </div>
 
