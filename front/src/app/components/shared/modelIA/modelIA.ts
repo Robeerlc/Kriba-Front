@@ -2,7 +2,7 @@ import { Component, inject, ChangeDetectionStrategy, ViewEncapsulation, ChangeDe
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ModelIAService } from '../../../service/modelIA.service';
 import { CommonModule } from '@angular/common';
-import {ModalData} from '../../../interfaces/modelIAData.interface'
+import { ModalData } from '../../../interfaces/modelIAData.interface'
 import { FeedService } from '../../../service/feedService.service';
 import { Router } from '@angular/router';
 import { InteractionService } from '../../../service/interactionService.service';
@@ -17,11 +17,7 @@ import { ErrorHttpService } from '../../../service/errorHttpService.service';
   templateUrl: './modelIA.html',
   styleUrl: './modelIA.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
-<<<<<<< Updated upstream
-  encapsulation: ViewEncapsulation.None,   // ← permite que ::ng-deep llegue al mat-dialog-container
-=======
   encapsulation: ViewEncapsulation.None,
->>>>>>> Stashed changes
 })
 export class ModelIA {
   @Input() article: any;
@@ -44,19 +40,12 @@ export class ModelIA {
     this.isLoading = true;
     this.errorMessage = '';
 
-<<<<<<< Updated upstream
-    this.modelAIService.getSummary(this.data.content,this.data.url,this.data.category).subscribe({
-      next: (summary) => {
-        this.summaryResult = summary.summary;
-        this.remainingUses = summary.remainingDailyUses;
-=======
     this.sendInteracition();
-    this.modelAIService.getSummary(this.data.content,this.data.url,this.data.category, this.data.article.id).subscribe({
+    this.modelAIService.getSummary(this.data.content, this.data.url, this.data.category, this.data.article.id).subscribe({
       next: (summary) => {
         this.summaryResult = summary.summary;
         this.remainingUses = summary.remainingDailyUses;
         sessionStorage.setItem('remainingUses', String(summary.remainingDailyUses));
->>>>>>> Stashed changes
         this.isLoading = false;
         this.cdr.detectChanges();
       },
@@ -68,13 +57,8 @@ export class ModelIA {
     });
   }
 
-<<<<<<< Updated upstream
-  sendInteracition(articleCat: string, interacition: string): void{
-    this.interactionService.postInteraction(this.data.category, 'SUMMARIZE').pipe(catchError((err) => this.errorHttpService.handleError(err)))
-=======
-  sendInteracition(): void{
-    this.interactionService.postInteraction(this.data.category, 'CLICK',this.data.article.id).pipe(catchError((err) => this.errorHttpService.handleError(err))).subscribe();
->>>>>>> Stashed changes
+  sendInteracition(): void {
+    this.interactionService.postInteraction(this.data.category, 'CLICK', this.data.article.id).pipe(catchError((err) => this.errorHttpService.handleError(err))).subscribe();
   }
   onReadFull(event: Event) {
     event.preventDefault();
