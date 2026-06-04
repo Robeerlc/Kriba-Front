@@ -15,7 +15,7 @@ import { ErrorHttpService } from '../../../service/errorHttpService.service';
     selector: 'articlecard',
     standalone: true,
     imports: [CommonModule],
-    templateUrl: './articleCard.html',
+    templateUrl: './articlecard.html',
     styleUrls: ['./articlecard.css']
 })
 export class ArticleCardComponent {
