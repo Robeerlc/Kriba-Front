@@ -9,16 +9,24 @@ import { catchError, Observable, throwError } from 'rxjs';
 export class StatsService {
   private http = inject(HttpClient);
 
+<<<<<<< Updated upstream
   private API_URL = 'http://localhost:8080/api/v1/statistics';
 
   getStatistics(): Observable<Statistics> {
     /*if (typeof localStorage === 'undefined') {
+=======
+  private API_URL = 'https://kriba-d08ba5-193-70-44-51.sslip.io/api/v1/statistics';
+
+  getStatistics(): Observable<Statistics> {
+    if (typeof localStorage === 'undefined') {
+>>>>>>> Stashed changes
       return throwError(() => new Error('No hay sesión'));
     }
 
     const email = localStorage.getItem('email');
     const pass = localStorage.getItem('password');
     const body = {
+<<<<<<< Updated upstream
       loginRequest: {
         email: email,
         password: pass,
@@ -30,6 +38,13 @@ export class StatsService {
       return throwError(() => new Error('No hay sesión'));
     }
     return this.http.get<Statistics>('/api/stats.json').pipe(catchError(this.handleError));
+=======
+        email: email,
+        password: pass,
+    };
+
+    return this.http.post<Statistics>(this.API_URL, body).pipe(catchError(this.handleError));
+>>>>>>> Stashed changes
   }
 
   private handleError(error: HttpErrorResponse) {

@@ -1,7 +1,10 @@
 <div class="card p-5" style="width: 100%; max-width: 580px;">
 
+<<<<<<< Updated upstream
   <div class="card p-5" style="width: 100%; max-width: 580px;">
 
+=======
+>>>>>>> Stashed changes
     <h2 class="fw-bold">KRIBA</h2>
     <p class="text-muted" style="font-size: 12px;">INTELLIGENT NEWS</p>
 
@@ -16,7 +19,11 @@
       }
 
       <div class="mb-3 mt-3">
+<<<<<<< Updated upstream
         <label for="email" class="form-label">Email</label>
+=======
+        <label for="email" class="form-label">Email</label>dirty e
+>>>>>>> Stashed changes
         <input id="email" type="email" class="form-control" formControlName="email" />
 
         @if (email.hasError('required') && (email.dirty || email.touched)) {
@@ -41,6 +48,15 @@
             La contraseña es requerida.
           </div>
         }
+<<<<<<< Updated upstream
+=======
+
+        @if (password.hasError('minlength') && (password.dirty || password.touched)) {
+          <div class="alert alert-danger mt-2">
+            Al menos 8 caracteres.
+          </div>
+        }
+>>>>>>> Stashed changes
       </div>
 
       <button type="submit" class="btn btn-dark w-100">
@@ -57,5 +73,8 @@
 
     </form>
 
+<<<<<<< Updated upstream
   </div>
+=======
+>>>>>>> Stashed changes
 </div>

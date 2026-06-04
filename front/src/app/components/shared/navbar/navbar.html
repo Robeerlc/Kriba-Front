@@ -1,6 +1,10 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-4">
 
+<<<<<<< Updated upstream
   <a class="navbar-brand fw-bold" routerLink="/home">KRIBA</a>
+=======
+  <a class="navbar-brand fw-bold">KRIBA</a>
+>>>>>>> Stashed changes
 
   <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
     <span class="navbar-toggler-icon"></span>
@@ -8,10 +12,21 @@
 
   <div class="collapse navbar-collapse" id="menu">
     <ul class="navbar-nav ms-auto gap-3">
+<<<<<<< Updated upstream
       <li class="nav-item">
         <a class="nav-link" routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a>
       </li>
        @if (userLoginOn) {
+=======
+
+      @if(!isRoute){
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a>
+        </li>
+      }
+
+      @if (userLoginOn) {
+>>>>>>> Stashed changes
         <li class="nav-item">
           <a class="nav-link" href="#" (click)="onLogout()">Cerrar Sesion</a>
         </li>
@@ -19,9 +34,18 @@
         <li class="nav-item">
           <a class="nav-link" routerLink="/" routerLinkActive="active">Profile</a>
         </li>
+<<<<<<< Updated upstream
         <li class="nav-item">
           <a class="nav-link" routerLink="/register" routerLinkActive="active">Register</a>
         </li>
+=======
+        <!--<li class="nav-item">
+          <a class="nav-link" routerLink="/" routerLinkActive="active">Iniciar Sesion</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/register" routerLinkActive="active">Register</a>
+        </li>-->
+>>>>>>> Stashed changes
       }
     </ul>
   </div>
