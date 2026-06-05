@@ -8,3 +8,77 @@ app-root {
   display: block;
   width: 100%;
 }
+
+/* Responsive base and utilities */
+:root{
+  --breakpoint-sm: 576px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 992px;
+  --breakpoint-xl: 1200px;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+img, picture, video { max-width: 100%; height: auto; display: block; }
+
+/* Make embedded iframes responsive */
+.responsive-embed { position: relative; width: 100%; padding-bottom: 56.25%; }
+.responsive-embed iframe { position: absolute; width: 100%; height: 100%; left: 0; top: 0; }
+
+/* Utility containers */
+.container-responsive { width: 100%; padding-left: 1rem; padding-right: 1rem; margin-left: auto; margin-right: auto; }
+@media (min-width: var(--breakpoint-sm)) { .container-responsive{ max-width: 540px; } }
+@media (min-width: var(--breakpoint-md)) { .container-responsive{ max-width: 720px; } }
+@media (min-width: var(--breakpoint-lg)) { .container-responsive{ max-width: 960px; } }
+@media (min-width: var(--breakpoint-xl)) { .container-responsive{ max-width: 1140px; } }
+
+/* Common responsive helpers */
+.hide-mobile { display: none !important; }
+.show-mobile { display: block !important; }
+@media (min-width: var(--breakpoint-md)){
+  .hide-mobile{ display: block !important; }
+  .show-mobile{ display: none !important; }
+}
+
+/* Improve text wrapping on small screens */
+p, h1,h2,h3,h4,h5,h6 { word-wrap: break-word; }
+
+/* Default fluid layout helpers */
+.row-flex { display: flex; flex-wrap: wrap; gap: 1rem; }
+.col-flex { flex: 1 1 0; min-width: 0; }
+
+/* Responsive layout for app pages with sidebars */
+@media (max-width: 767px) {
+  .app-layout {
+    flex-direction: column;
+  }
+
+  .sidebar-section {
+    width: 100% !important;
+    border-right: none !important;
+    border-bottom: 1px solid #eef2f6 !important;
+    margin-bottom: 1rem !important;
+    background-color: #ffffff;
+  }
+
+  .main-feed {
+    padding: 1.25rem !important;
+  }
+}
+
+/* Form and button responsive helpers */
+input[type="text"], input[type="email"], input[type="password"], textarea, select {
+  width: 100%;
+  max-width: 100%;
+}
+
+.form-card { background: #fff; padding: 1rem; border-radius: 10px; box-shadow: 0 2px 8px rgba(10,20,40,0.04); }
+
+button, .btn { min-height: 40px; }
+
+@media (max-width: 767px) {
+  .row-flex { flex-direction: column; }
+  .container-responsive { padding-left: 0.75rem; padding-right: 0.75rem; }
+  .btn { width: 100%; }
+}
+
