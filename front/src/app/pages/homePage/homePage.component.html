@@ -15,7 +15,8 @@
             [article]="articulo"
             (aiSummary)="onAISummary($event)"
             (readFull)="onReadFull($event)"
-            (subscriptionChanged)="onSubscriptionChanged($event)">
+            (subscriptionChanged)="onSubscriptionChanged($event)"
+             (favoriteRemoved)="onFavoriteRemoved($event)">
           </articlecard>
         }
 
