@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, signal, OnDestroy } from '@angular/core';
 import { LateralBarComponent } from '../../components/shared/lateralBar/lateralBarComponent';
 import { UserService } from '../../service/user.service';
 import { StatsChart } from '../../components/shared/chart/statsChart/statsChart';
@@ -13,7 +13,7 @@ import { LoginService } from '../../service/credentialsService.service';
   imports: [LateralBarComponent, StatsChart],
   standalone: true
 })
-export class UserPageComponent {
+export class UserPageComponent implements OnDestroy {
   private loginService = inject(LoginService);
   private userService = inject(UserService);
   private router = inject(Router)
@@ -24,15 +24,17 @@ export class UserPageComponent {
   totalArticlesRead = signal<number>(0);
   generalData = signal<CategoryStats[]>([]);
   private statsService = inject(StatsService);
-  ngOnInit(): void {
-    if (typeof localStorage === 'undefined') {
-      return;
-    }
+  private remainingUsesHandler = (event: any) => {
+    this.dailyUses.set(Number(event.detail));
+  };
 
-    this.auth = JSON.parse(localStorage.getItem('auth') || '{}');
-    this.userName.set(this.auth.user?.username ?? '');
-    this.userEmail.set(localStorage.getItem('email') ?? '');
-    this.dailyUses.set(Number(localStorage.getItem('remainingUses') ?? 3));
+  constructor() {
+    if (typeof localStorage !== 'undefined') {
+      this.auth = JSON.parse(localStorage.getItem('auth') || '{}');
+      this.userName.set(this.auth.user?.username ?? '');
+      this.userEmail.set(localStorage.getItem('email') ?? '');
+      this.dailyUses.set(Number(localStorage.getItem('remainingUses') ?? 3));
+    }
 
     this.statsService.getStatistics().subscribe({
       next: (stats) => {
@@ -41,6 +43,12 @@ export class UserPageComponent {
       },
       error: (err) => console.error(err),
     });
+
+    window.addEventListener('remainingUsesChanged', this.remainingUsesHandler as EventListener);
+  }
+
+  ngOnDestroy(): void {
+    window.removeEventListener('remainingUsesChanged', this.remainingUsesHandler as EventListener);
   }
 
   openEditModal(): void {

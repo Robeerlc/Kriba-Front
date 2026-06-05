@@ -45,7 +45,10 @@ export class ModelIA {
       next: (summary) => {
         this.summaryResult = summary.summary;
         this.remainingUses = summary.remainingDailyUses;
+        localStorage.setItem('remainingUses', String(summary.remainingDailyUses));
         sessionStorage.setItem('remainingUses', String(summary.remainingDailyUses));
+        // notify other parts of the app that remainingUses changed
+        window.dispatchEvent(new CustomEvent('remainingUsesChanged', { detail: summary.remainingDailyUses }));
         this.isLoading = false;
         this.cdr.detectChanges();
       },
@@ -56,6 +59,8 @@ export class ModelIA {
       }
     });
   }
+
+
 
   sendInteracition(): void {
     this.interactionService.postInteraction(this.data.category, 'CLICK', this.data.article.id).pipe(catchError((err) => this.errorHttpService.handleError(err))).subscribe();

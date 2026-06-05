@@ -1,6 +1,7 @@
 section {
-  height: 100vh;
+  min-height: calc(100vh - 3.5rem);
   width: 100%;
+  margin: 0;
   position: relative;
   overflow: hidden;
 }

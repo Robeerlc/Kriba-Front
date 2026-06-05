@@ -12,6 +12,8 @@ export class ModelIAService {
   private http = inject(HttpClient);
   private API_URL = 'https://kriba-d08ba5-193-70-44-51.sslip.io/api/v1/ai/summarize';
   private readonly _dialog = inject(MatDialog);
+  private bodyOverflowBackup = '';
+  private htmlOverflowBackup = '';
 
   getSummary(textContent: string, articleUrl: string, category: string, externalId: string): Observable<Summary> {
     if (typeof localStorage == 'undefined') {
@@ -34,12 +36,19 @@ export class ModelIAService {
   }
 
   openModel(articleTitle: string, articleContent: string, articleUrl: string, articleCategory:string, article:any ) {
-    this._dialog.open(ModelIA, {
+    if (typeof document !== 'undefined') {
+      this.bodyOverflowBackup = document.body.style.overflow;
+      this.htmlOverflowBackup = document.documentElement.style.overflow;
+      document.body.style.overflow = 'hidden';
+      document.documentElement.style.overflow = 'hidden';
+    }
+
+    const dialogRef = this._dialog.open(ModelIA, {
       width: '400px',
       maxWidth: '90vw',
       position: { right: '0', top: '0' },
       panelClass: 'slide-in-modal',
-      hasBackdrop: false,
+      hasBackdrop: true,
       autoFocus: false,
       data: {
         title: articleTitle,
@@ -47,13 +56,23 @@ export class ModelIAService {
         url: articleUrl,
         category: articleCategory,
         article: article,
-
       }
-  });
-}
+    });
+
+    dialogRef.afterClosed().subscribe(() => {
+      if (typeof document !== 'undefined') {
+        document.body.style.overflow = this.bodyOverflowBackup || '';
+        document.documentElement.style.overflow = this.htmlOverflowBackup || '';
+      }
+    });
+  }
 
   closeModal() {
     this._dialog.closeAll();
+    if (typeof document !== 'undefined') {
+      document.body.style.overflow = this.bodyOverflowBackup || '';
+      document.documentElement.style.overflow = this.htmlOverflowBackup || '';
+    }
   }
 
   private handleError(error: HttpErrorResponse) {
@@ -61,10 +80,16 @@ export class ModelIAService {
 
     if (error.status === 0) {
       console.error('Error de red: ' + error.error);
+      errorMsg = 'No se pudo conectar con el servidor. Revisa tu conexión.';
     } else {
       console.error('Error de back: ', error.status, error.error);
-      if (error.error?.error) {
+      // Si el backend responde con 400 (por límite diario de IA), mostrar mensaje claro
+      if (error.status === 400) {
+        errorMsg = 'No le quedan intentos para hoy. Vuelve mañana para generar más resúmenes.';
+      } else if (error.error?.error) {
         errorMsg = error.error.error;
+      } else if (error.error?.message) {
+        errorMsg = error.error.message;
       }
     }
 

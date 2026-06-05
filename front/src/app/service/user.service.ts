@@ -46,7 +46,7 @@ export class UserService {
     this.dialog.open(EditComponent, {
       width: '400px',
       maxWidth: '90vw',
-      hasBackdrop: false,
+      hasBackdrop: true,
       autoFocus: false,
       data: {
         username: actualUsername,
