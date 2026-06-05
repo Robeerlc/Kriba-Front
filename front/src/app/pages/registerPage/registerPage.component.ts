@@ -5,6 +5,6 @@ import { Register } from "../../components/shared/register/register";
   selector: 'app-register-page',
   imports: [Register],
   templateUrl: './registerPage.component.html',
-  styleUrl: './registerPage.component.css',
+  styleUrls: ['./registerPage.component.css'],
 })
 export class RegisterPageComponent {}

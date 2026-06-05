@@ -20,6 +20,10 @@
   border-radius: 16px;
   overflow: hidden;
   font-family: 'Segoe UI', system-ui, sans-serif;
+  display: flex;
+  flex-direction: column;
+  /* Limit modal height to viewport and allow internal scrolling */
+  max-height: calc(100vh - 48px);
 }
 
 /* ── Header ── */
@@ -61,6 +65,9 @@
 /* ── Body ── */
 .modal-body {
   padding: 1.1rem 1.25rem 1.25rem;
+  /* make body scrollable when content is long */
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .article-title {
