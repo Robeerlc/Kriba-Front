@@ -9,6 +9,7 @@ import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-homepage',
+  standalone: true,
   imports: [CommonModule, LateralBarComponent, ArticleCardComponent],
   templateUrl: './homePage.component.html',
   styleUrls: ['./homepage.component.css'],

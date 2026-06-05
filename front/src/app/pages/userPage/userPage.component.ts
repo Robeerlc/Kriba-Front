@@ -48,12 +48,17 @@ export class UserPageComponent {
   }
 
 
-  
+
   deleteUser(){
-    this.userService.deleteUser();
-    this.loginService.logout();
-    sessionStorage.clear();
-    localStorage.clear();
-    this.router.navigate(['/'])
+    if (!confirm('¿Estás seguro de que quieres eliminar tu cuenta? Esta acción no se puede deshacer.')) return;
+    this.userService.deleteUser().subscribe({
+      next: () => {
+        this.loginService.logout();
+        localStorage.clear();
+        sessionStorage.clear();
+        this.router.navigate(['/']);
+      },
+      error: (err) => console.error(err)
+    });
   }
 }
