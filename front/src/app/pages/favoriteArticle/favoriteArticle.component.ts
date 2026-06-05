@@ -39,5 +39,6 @@ export class FavoriteAricle implements OnInit {
     this.favorites.update(listaActual =>
       listaActual.filter(fav =>fav.externalArticleId !== idEliminado)
     );
+     this.feedService.favoriteRemoved$.next(idEliminado);
   }
 }

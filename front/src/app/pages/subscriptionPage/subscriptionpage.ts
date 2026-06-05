@@ -56,6 +56,7 @@ export class Subscriptionpage implements OnInit {
           this.subscriptions.update(x =>
             x.filter(item => item.externalSourceId !== sub.externalSourceId)
           );
+          this.feedService.subscriptionCancelled$.next(sub.sourceName);
 
         },
         error: (err) => {

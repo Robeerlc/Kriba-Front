@@ -49,6 +49,22 @@ export class HomePageComponent implements OnInit, OnDestroy {
         this.getFeed(category);
       }
     });
+
+    this.feedService.favoriteRemoved$.subscribe((id) => {
+      const updated = this.visibleArticles().map((a) =>
+        a.id === id ? { ...a, isFavorite: false } : a,
+      );
+      this.visibleArticles.set(updated);
+      sessionStorage.setItem('cachedArticles', JSON.stringify(updated));
+    });
+
+    this.feedService.subscriptionCancelled$.subscribe((sourceName) => {
+      const updated = this.visibleArticles().map((a) =>
+        a.source?.name === sourceName ? { ...a, isSubscribed: false } : a,
+      );
+      this.visibleArticles.set(updated);
+      sessionStorage.setItem('cachedArticles', JSON.stringify(updated));
+    });
   }
 
   ngOnDestroy(): void {
@@ -76,7 +92,13 @@ export class HomePageComponent implements OnInit, OnDestroy {
     });
     this.visibleArticles.set(articulosActualizados);
   }
-
+  onFavoriteRemoved(externalId: string): void {
+    const updated = this.visibleArticles().map((a) =>
+      a.id === externalId ? { ...a, isFavorite: false } : a,
+    );
+    this.visibleArticles.set(updated);
+    sessionStorage.setItem('cachedArticles', JSON.stringify(updated));
+  }
   getFeed(category?: string) {
     this.categoriaSeleccionada = category ?? 'mixed';
     const categoriaParam = category === 'mixed' ? undefined : category;
@@ -101,7 +123,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
           const newArticles = artic.content.filter((a) => !currentIds.has(a.id));
           const updated = [...this.visibleArticles(), ...newArticles];
           this.visibleArticles.set(updated);
-         sessionStorage.setItem('cachedArticles', JSON.stringify(updated));
+          sessionStorage.setItem('cachedArticles', JSON.stringify(updated));
           this.currentPage++;
           this.hasMore = artic.content.length > 0 && this.currentPage < this.maxPages;
         }
