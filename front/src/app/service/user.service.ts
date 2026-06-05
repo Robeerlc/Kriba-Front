@@ -10,8 +10,8 @@ import { UserInterface } from '../interfaces/user.Interface';
 })
 export class UserService {
   private http = inject(HttpClient);
-  private Api_Url = 'https://kriba-d08ba5-193-70-44-51.sslip.io/api/v1/auth/update ';
-  private API_URL_DELETE = 'https://kriba-d08ba5-193-70-44-51.sslip.io/api/v1/auth/(delete'
+  private Api_Url = 'https://kriba-d08ba5-193-70-44-51.sslip.io/api/v1/auth/update';
+  private API_URL_DELETE = 'https://kriba-d08ba5-193-70-44-51.sslip.io/api/v1/auth/delete'
   private readonly dialog = inject(MatDialog);
 
   modifyData(userName: string, userEmail: string, password: string): Observable<UserInterface> {
@@ -61,7 +61,9 @@ export class UserService {
 
 
   deleteUser(){
-
+    if (typeof localStorage === 'undefined') {
+    return throwError(() => new Error('No hay sesion'));
+  }
     const currentEmail = localStorage.getItem('email')
     const currentPassword = localStorage.getItem('password')
 
