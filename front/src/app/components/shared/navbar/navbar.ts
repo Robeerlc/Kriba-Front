@@ -1,10 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { LoginService } from '../../../service/credentialsService.service';
 import { CategoryService } from '../../../service/category.service';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+
+declare var bootstrap: any;
 
 @Component({
   selector: 'app-navbar',
@@ -14,6 +16,9 @@ import { CommonModule } from '@angular/common';
 })
 export class NavbarComponent {
   userLoginOn: boolean = false;
+  @ViewChild('navbarToggler', { static: false }) navbarToggler?: ElementRef;
+  @ViewChild('navbarCollapse', { static: false }) navbarCollapse?: ElementRef;
+
   categorias = [
     'mixed',
     'general',
@@ -35,10 +40,20 @@ export class NavbarComponent {
 
   selectCategory(category: string): void {
     this.categoryService.setCategory(category);
+    this.closeNavbar();
   }
 
   get selectedCategory(): string {
     return this.categoryService.selectedCategory;
+  }
+
+  closeNavbar(): void {
+    if (this.navbarToggler && this.navbarCollapse) {
+      const bsCollapse = new bootstrap.Collapse(this.navbarCollapse.nativeElement, {
+        toggle: false
+      });
+      bsCollapse.hide();
+    }
   }
 
   ngOnInit(): void {
@@ -51,8 +66,10 @@ export class NavbarComponent {
 
   onLogout(): void {
     this.loginService.logout();
+    this.closeNavbar();
     this.router.navigateByUrl('/');
   }
+
   ngOnDestroy(): void {
     this.loginSub?.unsubscribe();
   }

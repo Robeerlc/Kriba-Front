@@ -1,8 +1,12 @@
 section {
   min-height: calc(100vh - 60px);
-  width: 100%;
+  width: 100vw;
+  height: 100vh;
   margin: 0;
-  position: relative;
+  position: fixed;
+  top: 60px;
+  left: 0;
+  right: 0;
   overflow: hidden;
   display: flex;
   justify-content: center;
@@ -47,6 +51,9 @@ section {
 @media (max-width: 767px) {
   section {
     min-height: 100vh;
+    height: auto;
+    position: relative;
+    top: auto;
   }
 
   .content {
@@ -58,6 +65,7 @@ section {
 
   .back {
     background-attachment: scroll;
+    background-size: cover;
   }
 }
 
