@@ -30,8 +30,13 @@
 }
 
 .navbar-toggler {
-  border: none;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
   padding: 0.25rem 0.5rem;
+  transition: all 0.2s ease;
+}
+
+.navbar-toggler:focus {
+  box-shadow: 0 0 0 0.25rem rgba(102, 126, 234, 0.25);
 }
 
 .navbar-toggler-icon {
@@ -73,6 +78,11 @@
   background-color: rgba(255, 255, 255, 0.15);
 }
 
+/* Collapse styling */
+.navbar-collapse {
+  transition: max-height 0.3s ease;
+}
+
 @media (max-width: 991px) {
   .navbar {
     padding: 0.5rem 0.8rem;
@@ -107,18 +117,28 @@
   }
 
   /* Make category buttons scrollable horizontally on small screens */
+  .navbar-nav {
+    gap: 0 !important;
+  }
+
+  .navbar-nav .nav-item {
+    width: 100%;
+  }
+
   .navbar-nav .nav-item.d-flex {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     padding: 0.5rem 0.25rem;
     justify-content: flex-start;
     max-width: 100vw;
+    width: 100%;
   }
 
   .navbar-nav .nav-item.d-flex .btn {
     margin: 0.2rem;
     font-size: 0.75rem;
     padding: 0.35rem 0.75rem !important;
+    flex-shrink: 0;
   }
 
   .navbar-nav .nav-item.d-flex::-webkit-scrollbar {
@@ -141,16 +161,21 @@
   .navbar-nav {
     flex-direction: column;
     align-items: stretch !important;
-    gap: 0.25rem;
+    gap: 0 !important;
   }
 
   .navbar-nav li {
     width: 100%;
   }
 
+  .navbar-nav .nav-item:not(.d-flex) {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
   .navbar-nav .nav-item.d-flex {
     flex-direction: row;
     align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   }
 }
 

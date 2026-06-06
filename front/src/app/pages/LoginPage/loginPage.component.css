@@ -19,9 +19,9 @@ section {
   background-image: url('https://picsum.photos/1920/1080');
   background-size: cover;
   background-position: center;
+  background-repeat: no-repeat;
   background-attachment: fixed;
-  filter: blur(4px);
-  transform: scale(1.05);
+  filter: blur(5px);
 }
 
 .overlay {
@@ -54,6 +54,10 @@ section {
     padding: 1rem;
     align-items: flex-start;
     padding-top: 2rem;
+  }
+
+  .back {
+    background-attachment: scroll;
   }
 }
 

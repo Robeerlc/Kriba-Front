@@ -19,20 +19,49 @@ export class StatsChart implements OnInit {
         const values = stats.generalData.map(item => item.percentage);
 
         this.chart = new Chart('chart', {
-          type: 'polarArea' as ChartType,
+          type: 'doughnut' as ChartType,
           data: {
             labels: labels,
             datasets: [{
               label: 'Categorías',
               data: values,
               backgroundColor: [
-                'rgb(255, 99, 132)',
+                'rgb(54, 162, 235)',
                 'rgb(75, 192, 192)',
-                'rgb(255, 205, 86)',
+                'rgb(255, 206, 86)',
+                'rgb(153, 102, 255)',
+                'rgb(255, 159, 64)',
                 'rgb(201, 203, 207)',
-                'rgb(54, 162, 235)'
-              ]
+                'rgb(255, 99, 132)',
+                'rgb(99, 255, 132)'
+              ],
+              borderColor: [
+                'rgb(54, 162, 235)',
+                'rgb(75, 192, 192)',
+                'rgb(255, 206, 86)',
+                'rgb(153, 102, 255)',
+                'rgb(255, 159, 64)',
+                'rgb(201, 203, 207)',
+                'rgb(255, 99, 132)',
+                'rgb(99, 255, 132)'
+              ],
+              borderWidth: 2
             }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: true,
+            plugins: {
+              legend: {
+                position: 'bottom',
+                labels: {
+                  padding: 15,
+                  font: {
+                    size: 12
+                  }
+                }
+              }
+            }
           }
         });
       },

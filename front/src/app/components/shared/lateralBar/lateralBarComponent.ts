@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { RouterLink, RouterLinkActive } from "@angular/router";
+import { RouterLink, RouterLinkActive, Router } from "@angular/router";
 
 @Component({
   selector: 'lateralBar',
@@ -8,4 +8,10 @@ import { RouterLink, RouterLinkActive } from "@angular/router";
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrl: './lateralBarComponent.css'
 })
-export class LateralBarComponent {}
+export class LateralBarComponent {
+  constructor(private router: Router) { }
+
+  goHome(): void {
+    this.router.navigate(['/home']);
+  }
+}

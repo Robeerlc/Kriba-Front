@@ -1,5 +1,5 @@
 <div class="kriba-sidebar">
-    <div class="brand-side">
+    <div class="brand-side" (click)="goHome()" style="cursor: pointer;">
         <div class="brand-name">Kriba</div>
         <div class="brand-tagline">INTELLIGENT NEWS</div>
     </div>
@@ -8,12 +8,6 @@
 
     <div class="sidebar-nav">
         <ul>
-           <li>
-                <a routerLink="/home" routerLinkActive="active-link">
-                    <i class="fas fa-user-circle"></i>
-                    <span>Feed</span>
-                </a>
-            </li>
             <li>
                 <a routerLink="/user" routerLinkActive="active-link">
                     <i class="fas fa-user-circle"></i>

@@ -13,6 +13,12 @@
 
 .brand-side {
   margin-bottom: 2.5rem;
+  transition: all 0.2s ease;
+}
+
+.brand-side:hover {
+  transform: translateY(-2px);
+  cursor: pointer;
 }
 
 .brand-name {
@@ -20,6 +26,11 @@
   font-weight: 700;
   letter-spacing: -0.02em;
   color: #1e2a5e;
+  transition: color 0.2s ease;
+}
+
+.brand-side:hover .brand-name {
+  color: #667eea;
 }
 
 .brand-tagline {

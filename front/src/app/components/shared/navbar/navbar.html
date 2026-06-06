@@ -1,6 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-4">
   <a class="navbar-brand fw-bold">KRIBA</a>
-  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu" aria-controls="menu"
+    aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
@@ -30,8 +31,6 @@
       <li class="nav-item">
         @if (userLoginOn) {
         <a class="nav-link" href="#" (click)="onLogout(); $event.preventDefault()">Cerrar Sesión</a>
-        } @else {
-        <a class="nav-link" routerLink="/" routerLinkActive="active">Profile</a>
         }
       </li>
     </ul>
