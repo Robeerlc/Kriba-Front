@@ -1,50 +1,38 @@
 .app-layout {
   display: flex;
-  min-height: 100vh;
-  font-family: 'Inter', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  min-height: calc(100vh - 60px);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
 }
 
 .sidebar-section {
-  width: 280px;
+  width: 240px;
   border-right: 1px solid #eef2f6;
   background-color: #ffffff;
+  overflow-y: auto;
+  flex-shrink: 0;
 }
 
 .main-feed {
   flex: 1;
   padding: 2rem;
   background-color: #fcfcfd;
-}
-
-@media (max-width: 767px) {
-  .app-layout {
-    flex-direction: column;
-  }
-
-  .sidebar-section {
-    width: 100%;
-    border-right: none;
-    border-bottom: 1px solid #eef2f6;
-    margin-bottom: 1rem;
-  }
-
-  .main-feed {
-    padding: 1.25rem;
-  }
+  overflow-y: auto;
 }
 
 .main-feed h2 {
-  font-size: 1.8rem;
+  font-size: 2rem;
   font-weight: 700;
   letter-spacing: -0.02em;
   color: #1e2a5e;
-  margin-bottom: 25px;
+  margin-bottom: 2rem;
+  margin-top: 0;
 }
 
 .card {
   border: 1px solid #eef2f6;
-  border-radius: 14px;
+  border-radius: 12px;
   background-color: #ffffff;
+  transition: all 0.2s ease;
 }
 
 .card-title {
@@ -55,6 +43,7 @@
 
 .card-text {
   color: #7c8ba0;
+  font-size: 0.9rem;
 }
 
 .subscription-hover {
@@ -65,7 +54,7 @@
 .subscription-hover:hover {
   background-color: #f0f4fa;
   transform: translateY(-3px);
-  box-shadow: 0 4px 12px rgba(30, 42, 94, 0.05);
+  box-shadow: 0 4px 12px rgba(30, 42, 94, 0.08);
 }
 
 .subscription-hover:hover .card-title {
@@ -74,4 +63,90 @@
 
 .min-w-0 {
   min-width: 0;
+}
+
+/* Tablet adjustments */
+@media (max-width: 992px) {
+  .sidebar-section {
+    width: 200px;
+  }
+
+  .main-feed {
+    padding: 1.5rem;
+  }
+
+  .main-feed h2 {
+    font-size: 1.75rem;
+  }
+}
+
+/* Mobile adjustments */
+@media (max-width: 767px) {
+  .app-layout {
+    flex-direction: column;
+    min-height: auto;
+  }
+
+  .sidebar-section {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid #eef2f6;
+    margin-bottom: 1rem;
+    overflow-y: visible;
+  }
+
+  .main-feed {
+    padding: 1.25rem;
+    overflow-y: visible;
+  }
+
+  .main-feed h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .card {
+    margin-bottom: 1rem;
+  }
+
+  .card-title {
+    font-size: 0.95rem;
+  }
+
+  .card-text {
+    font-size: 0.85rem;
+  }
+}
+
+/* Extra small mobile */
+@media (max-width: 576px) {
+  .app-layout {
+    flex-direction: column;
+  }
+
+  .sidebar-section {
+    margin-bottom: 0.75rem;
+  }
+
+  .main-feed {
+    padding: 0.75rem;
+  }
+
+  .main-feed h2 {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+  }
+
+  .card {
+    margin-bottom: 0.75rem;
+    padding: 0.75rem;
+  }
+
+  .card-title {
+    font-size: 0.9rem;
+  }
+
+  .card-text {
+    font-size: 0.8rem;
+  }
 }

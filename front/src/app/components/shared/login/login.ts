@@ -13,6 +13,7 @@ import { LoginInterface } from '../../../interfaces/loginInterface';
   standalone: true,
   imports: [ReactiveFormsModule, CommonModule, RouterLink],
   templateUrl: './login.html',
+  styleUrl: './login.css'
 })
 export class Login {
 

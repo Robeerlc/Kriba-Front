@@ -1,16 +1,16 @@
 :host {
     display: block;
-    height: calc(100vh - 56px);
-    min-height: calc(100vh - 56px);
+    height: calc(100vh - 60px);
     overflow: hidden;
 }
 
 .app-layout {
     display: flex;
-    max-width: 1440px;
+    max-width: 1400px;
     margin: 0 auto;
     background-color: #ffffff;
-    min-height: 100%;
+    height: 100%;
+    gap: 0;
 }
 
 .sidebar-section {
@@ -19,168 +19,68 @@
 
 .container-fluid {
     height: 100%;
-    margin-top: 0 !important;
-    padding-top: 1.5rem;
+    margin: 0 !important;
+    padding: 0 !important;
 }
 
 .row.g-4 {
     height: 100%;
+    margin: 0 !important;
+    gap: 0 !important;
 }
 
 aside.col-12.col-md-4.col-lg-3 {
     height: 100%;
+    border-right: 1px solid #eef2f6;
+    overflow-y: auto;
+}
+
+main.col-12.col-md-8.col-lg-9 {
+    height: 100%;
+    overflow-y: auto;
+    background-color: #fcfcfd;
+    padding: 2rem;
 }
 
 .main-feed {
     flex: 1;
     background-color: #fcfcfd;
     padding: 2rem;
-    max-width: calc(100% - 280px);
     overflow-y: auto;
     height: 100%;
+}
 
-    .digest-header {
-        margin-bottom: 2rem;
-        border-bottom: 1px solid #edf2f7;
-        padding-bottom: 1rem;
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-end;
-        flex-wrap: wrap;
+.digest-header {
+    margin-bottom: 2rem;
+    border-bottom: 1px solid #edf2f7;
+    padding-bottom: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
 
-        .digest-title {
-            h2 {
-                font-size: 1.75rem;
-                font-weight: 700;
-                color: #0a1929;
-                margin: 0;
-            }
+.digest-title h2 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #0a1929;
+    margin: 0;
+}
 
-            p {
-                color: #5c6e8c;
-                font-size: 0.85rem;
-                margin-top: 0.25rem;
-            }
-        }
+.digest-title p {
+    color: #5c6e8c;
+    font-size: 0.85rem;
+    margin-top: 0.25rem;
+}
 
-        .ai-sentiment-chip {
-            background: #eaf6ff;
-            border-radius: 40px;
-            padding: 0.5rem 1rem;
-            font-size: 0.75rem;
-            font-weight: 600;
-            color: #0066cc;
-        }
-    }
-
-    .recommendation-block {
-        margin-top: 2rem;
-        background: #fafcff;
-        border-radius: 24px;
-        padding: 1.4rem 1.5rem;
-        border: 1px solid #eef2f8;
-
-        .rec-title {
-            font-weight: 700;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            color: #6c7f9c;
-            margin-bottom: 1rem;
-        }
-
-        .rec-card {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0.8rem 0;
-            border-bottom: 1px solid #eef2f8;
-            gap: 1rem;
-
-            &:last-child {
-                border-bottom: none;
-            }
-
-            .rec-category {
-                font-size: 0.7rem;
-                font-weight: 700;
-                color: #2d6a4f;
-                background: #e9f5ef;
-                padding: 0.2rem 0.6rem;
-                border-radius: 30px;
-                white-space: nowrap;
-            }
-
-            .rec-text {
-                font-weight: 500;
-                font-size: 0.85rem;
-                color: #1e2f41;
-                flex: 1;
-            }
-
-            .summarize-now {
-                background: none;
-                border: none;
-                font-size: 0.7rem;
-                font-weight: 600;
-                color: #1e5f9e;
-                cursor: pointer;
-                white-space: nowrap;
-
-                &:hover {
-                    text-decoration: underline;
-                }
-            }
-        }
-    }
-
-    .market-sentiment {
-        margin-top: 2rem;
-        background: linear-gradient(120deg, #f1f6fe, white);
-        border-radius: 28px;
-        padding: 1rem 1.5rem;
-        border: 1px solid #e2edff;
-
-        .sentiment-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-
-            .sentiment-title {
-                font-weight: 700;
-                font-size: 0.8rem;
-                letter-spacing: 1px;
-            }
-
-            .sentiment-text {
-                font-weight: 600;
-                margin-top: 6px;
-
-                .bullish {
-                    color: #15803d;
-                }
-            }
-
-            .hashtags {
-                display: flex;
-                gap: 12px;
-                margin-top: 8px;
-
-                span {
-                    background: #eef2ff;
-                    padding: 0.2rem 0.7rem;
-                    border-radius: 16px;
-                    font-size: 0.7rem;
-                }
-            }
-
-            i {
-                font-size: 2rem;
-                color: #467bb0;
-            }
-        }
-    }
+.ai-sentiment-chip {
+    background: #eaf6ff;
+    border-radius: 40px;
+    padding: 0.5rem 1rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #0066cc;
 }
 
 .spinner {
@@ -194,27 +94,90 @@ aside.col-12.col-md-4.col-lg-3 {
 }
 
 @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-@media (max-width: 860px) {
-    .app-layout {
-        flex-direction: column;
+    0% {
+        transform: rotate(0deg);
     }
 
-    .main-feed {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Responsive layout for medium screens */
+@media (max-width: 992px) {
+    .app-layout {
         max-width: 100%;
+    }
+
+    main.col-12.col-md-8.col-lg-9 {
         padding: 1.5rem;
     }
+
+    .digest-title h2 {
+        font-size: 1.5rem;
+    }
 }
 
-/* Additional small-screen tweaks to account for fixed compact sidebar */
-@media (max-width: 767px) {
-    .main-feed {
-        margin-left: 88px;
-        padding: 1rem;
+/* Responsive layout for tablets */
+@media (max-width: 768px) {
+    :host {
         height: auto;
         overflow: visible;
+    }
+
+    .app-layout {
+        flex-direction: column;
+        height: auto;
+    }
+
+    aside.col-12.col-md-4.col-lg-3 {
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid #eef2f6;
+        overflow: visible;
+    }
+
+    main.col-12.col-md-8.col-lg-9 {
+        height: auto;
+        min-height: calc(100vh - 180px);
+        padding: 1.25rem;
+    }
+
+    .digest-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .digest-title h2 {
+        font-size: 1.25rem;
+    }
+
+    .digest-title p {
+        font-size: 0.8rem;
+    }
+}
+
+/* Responsive layout for mobile */
+@media (max-width: 576px) {
+    main.col-12.col-md-8.col-lg-9 {
+        padding: 0.75rem;
+        min-height: auto;
+    }
+
+    .digest-header {
+        margin-bottom: 1.5rem;
+    }
+
+    .digest-title h2 {
+        font-size: 1.1rem;
+    }
+
+    .digest-title p {
+        font-size: 0.75rem;
+    }
+
+    .ai-sentiment-chip {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.7rem;
     }
 }

@@ -31,7 +31,7 @@ export class NavbarComponent {
     private loginService: LoginService,
     private router: Router,
     private categoryService: CategoryService
-  ) {}
+  ) { }
 
   selectCategory(category: string): void {
     this.categoryService.setCategory(category);
@@ -51,7 +51,7 @@ export class NavbarComponent {
 
   onLogout(): void {
     this.loginService.logout();
-    this.router.navigateByUrl('/login');
+    this.router.navigateByUrl('/');
   }
   ngOnDestroy(): void {
     this.loginSub?.unsubscribe();
