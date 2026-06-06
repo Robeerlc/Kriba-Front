@@ -12,17 +12,14 @@ export class AuthGuard implements CanActivate {
   constructor(
     private loginService: LoginService,
     private router: Router,
-    @Inject(PLATFORM_ID) private platformId: Object // <-- Añadimos esto
+    @Inject(PLATFORM_ID) private platformId: Object
   ) { }
 
   canActivate(): Observable<boolean> | boolean {
-    // Si Angular está renderizando en el servidor (SSR), le decimos que sí
-    // para que no interrumpa la carga prematuramente.
     if (!isPlatformBrowser(this.platformId)) {
       return true;
     }
 
-    // Una vez en el navegador, hace la comprobación real
     return this.loginService.userLoginOn.pipe(
       take(1),
       map(isLoggedIn => {

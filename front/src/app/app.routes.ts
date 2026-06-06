@@ -8,15 +8,18 @@ import { StatsPageComponent } from './pages/statisticsPage/statisticsPage.compon
 import { Subscriptionpage } from './pages/subscriptionPage/subscriptionpage';
 import { UserPageComponent } from './pages/userPage/userPage.component';
 import { AuthGuard } from './guards/auth.guard';
+import { GuestGuard } from './guards/guest.guard';
 
 export const routes: Routes = [
   {
     path: '',
-    component: RegisterPage
+    component: RegisterPage,
+    canActivate: [GuestGuard]
   },
   {
     path: 'register',
-    component: RegisterPageComponent
+    component: RegisterPageComponent,
+    canActivate: [GuestGuard]
   },
   {
     path: 'home',
