@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef } from '@angular/core';
+import { Component, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { LoginService } from '../../../service/credentialsService.service';
 import { CategoryService } from '../../../service/category.service';
@@ -6,17 +6,15 @@ import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
-declare var bootstrap: any;
-
 @Component({
   selector: 'app-navbar',
   imports: [CommonModule, RouterLink, RouterLinkActive],
   templateUrl: './navbar.html',
   styleUrl: './navbar.css',
 })
-export class NavbarComponent {
+export class NavbarComponent implements AfterViewInit {
   userLoginOn: boolean = false;
-  @ViewChild('navbarToggler', { static: false }) navbarToggler?: ElementRef;
+  menuOpen = false;
   @ViewChild('navbarCollapse', { static: false }) navbarCollapse?: ElementRef;
 
   categorias = [
@@ -47,12 +45,18 @@ export class NavbarComponent {
     return this.categoryService.selectedCategory;
   }
 
+  toggleNavbar(): void {
+    this.menuOpen = !this.menuOpen;
+  }
+
   closeNavbar(): void {
-    if (this.navbarToggler && this.navbarCollapse) {
-      const bsCollapse = new bootstrap.Collapse(this.navbarCollapse.nativeElement, {
-        toggle: false
-      });
-      bsCollapse.hide();
+    this.menuOpen = false;
+  }
+
+  ngAfterViewInit(): void {
+    // Ensure Bootstrap is fully loaded
+    if (typeof window !== 'undefined' && (window as any).bootstrap) {
+      console.log('Bootstrap loaded successfully');
     }
   }
 

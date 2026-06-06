@@ -1,16 +1,19 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark px-4">
-  <a class="navbar-brand fw-bold">KRIBA</a>
-  <button #navbarToggler class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu"
-    aria-controls="menu" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+<nav class="navbar navbar-dark bg-dark px-4">
+  <div class="navbar-inner">
+    <a class="navbar-brand fw-bold">KRIBA</a>
+    <button class="navbar-toggler" type="button" (click)="toggleNavbar()" 
+      [attr.aria-expanded]="menuOpen"
+      aria-controls="menu"
+      aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  </div>
 
-  <div #navbarCollapse class="collapse navbar-collapse" id="menu">
-    <ul class="navbar-nav w-100 d-flex justify-content-between align-items-center">
+  <div #navbarCollapse class="navbar-collapse" [class.show]="menuOpen" id="menu">
+    <ul class="navbar-nav">
       @if(!isRoute){
       <li class="nav-item">
-        <a class="nav-link" routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"
-          (click)="closeNavbar()">
+        <a class="nav-link" routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="closeNavbar()">
           Home
         </a>
       </li>
@@ -19,13 +22,15 @@
       }
 
       @if(!isRoute){
-      <li class="nav-item d-flex flex-wrap justify-content-center gap-2 flex-grow-1">
-        @for (cat of categorias; track cat) {
-        <button type="button" class="btn btn-sm rounded-pill px-3 py-1" [class.btn-light]="selectedCategory === cat"
-          [class.btn-outline-light]="selectedCategory !== cat" (click)="selectCategory(cat)">
-          {{ cat }}
-        </button>
-        }
+      <li class="nav-item categories-item">
+        <div class="categories-container">
+          @for (cat of categorias; track cat) {
+          <button type="button" class="btn btn-sm rounded-pill px-3 py-1" [class.btn-light]="selectedCategory === cat"
+            [class.btn-outline-light]="selectedCategory !== cat" (click)="selectCategory(cat)">
+            {{ cat }}
+          </button>
+          }
+        </div>
       </li>
       }
 
