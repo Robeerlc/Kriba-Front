@@ -39,6 +39,7 @@ export class NavbarComponent implements AfterViewInit {
   selectCategory(category: string): void {
     this.categoryService.setCategory(category);
     this.closeNavbar();
+    this.router.navigateByUrl('/home');
   }
 
   get selectedCategory(): string {
