@@ -8,21 +8,31 @@ import { UserInterface } from '../interfaces/userInterface';
   providedIn: 'root',
 })
 export class LoginService {
- //Que puede = lo que guarda
-  currentUserLoginOn: BehaviorSubject<boolean>=new BehaviorSubject<boolean>(false);
-  currentUserData: BehaviorSubject<UserInterface>=new BehaviorSubject<UserInterface>({id:0, email:''});
+  currentUserLoginOn: BehaviorSubject<boolean>;
+  currentUserData: BehaviorSubject<UserInterface>;
 
+  constructor(private http: HttpClient) {
+    const isBrowser = typeof window !== 'undefined';
 
-  // CON SPRING
-  // CAMBIAR LA URL Y PASARLE LAS CREDENCIALES
-  // MIRAR SI DA ERROR CON CrossOrigin
-  constructor(private http:HttpClient){}
-                                    // Contenedor porque la respuesta es asincrona
-  login(credentials:LoginInterface):Observable<UserInterface>{
+    // CAMBIO: Usamos localStorage en lugar de sessionStorage
+    const storedLogin = isBrowser ? localStorage.getItem('isLoggedIn') === 'true' : false;
+    const storedUser = isBrowser ? localStorage.getItem('userData') : null;
+
+    const initialUserData = storedUser ? JSON.parse(storedUser) : { id: 0, email: '' };
+
+    this.currentUserLoginOn = new BehaviorSubject<boolean>(storedLogin);
+    this.currentUserData = new BehaviorSubject<UserInterface>(initialUserData);
+  }
+
+  login(credentials: LoginInterface): Observable<UserInterface> {
     return this.http.get<UserInterface>('./data.json').pipe(
-      // Codigo secundario sin modificar valor
-      tap(userData=>{
-        // next envia el nuevo valor
+      tap(userData => {
+        if (typeof window !== 'undefined') {
+          // CAMBIO: Guardamos en localStorage
+          localStorage.setItem('isLoggedIn', 'true');
+          localStorage.setItem('userData', JSON.stringify(userData));
+        }
+
         this.currentUserData.next(userData);
         this.currentUserLoginOn.next(true);
       }),
@@ -30,29 +40,30 @@ export class LoginService {
     );
   }
 
-  //200 ok
-  //404 no encontro
-  //500 error server
-  //0 falla antes del server (URL)
-  private handleError(error:HttpErrorResponse){
-    if(error.status==0){
-      console.error('Se ha producido un error'+error.error);
-    }else{
-      console.error('Backend retorno el codigo de estado ',error.status, error.error);
+  private handleError(error: HttpErrorResponse) {
+    if (error.status == 0) {
+      console.error('Se ha producido un error' + error.error);
+    } else {
+      console.error('Backend retorno el codigo de estado ', error.status, error.error);
     }
-    return throwError(()=>new Error('Algo fallo intentelo de nuevo'));
+    return throwError(() => new Error('Algo fallo intentelo de nuevo'));
   }
 
-  // Gettes encapsulamiento
-  get userData():Observable<UserInterface>{
+  get userData(): Observable<UserInterface> {
     return this.currentUserData.asObservable();
   }
 
-  get userLoginOn():Observable<boolean>{
+  get userLoginOn(): Observable<boolean> {
     return this.currentUserLoginOn.asObservable();
   }
 
-  logout(): void{
+  logout(): void {
+    if (typeof window !== 'undefined') {
+      // CAMBIO: Borramos de localStorage
+      localStorage.removeItem('isLoggedIn');
+      localStorage.removeItem('userData');
+    }
+
     this.currentUserLoginOn.next(false);
     this.currentUserData.next({ id: 0, email: '' });
   }

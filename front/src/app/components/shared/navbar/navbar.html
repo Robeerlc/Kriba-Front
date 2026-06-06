@@ -1,6 +1,7 @@
 <nav class="navbar navbar-dark bg-dark px-4">
   <div class="navbar-inner">
-    <a class="navbar-brand fw-bold">KRIBA</a>
+    <a class="navbar-brand fw-bold" routerLink="/">KRIBA</a>
+
     <button class="navbar-toggler" type="button" (click)="toggleNavbar()" [attr.aria-expanded]="menuOpen"
       aria-controls="menu" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -9,6 +10,7 @@
 
   <div #navbarCollapse class="navbar-collapse" [class.show]="menuOpen" id="menu">
     <ul class="navbar-nav">
+
       @if(!isRoute){
       <li class="nav-item categories-item">
         <div class="categories-container">

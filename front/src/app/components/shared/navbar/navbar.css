@@ -3,6 +3,10 @@
   padding: 0.6rem 1rem;
   background-color: #2c3e50 !important;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+  /* Añadido flex para estructurar logo y menú en la misma línea en PC */
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
 }
 
 .navbar-inner {
@@ -10,6 +14,7 @@
   justify-content: space-between;
   align-items: center;
   width: 100%;
+  /* Por defecto 100% en móviles */
 }
 
 .navbar-brand {
@@ -24,6 +29,7 @@
   color: #ffffff !important;
   transition: all 0.2s ease;
   font-weight: 500;
+  text-decoration: none;
 }
 
 .navbar .nav-link:hover {
@@ -40,6 +46,7 @@
   border: 1px solid rgba(255, 255, 255, 0.3) !important;
   padding: 0.25rem 0.5rem;
   transition: all 0.2s ease;
+  background: transparent;
 }
 
 .navbar-toggler:focus {
@@ -47,6 +54,10 @@
 }
 
 .navbar-toggler-icon {
+  display: inline-block;
+  width: 1.5em;
+  height: 1.5em;
+  vertical-align: middle;
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 255, 255, 0.7)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
 }
 
@@ -55,6 +66,7 @@
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.3s ease;
+  width: 100%;
 }
 
 .navbar-collapse.show {
@@ -79,6 +91,8 @@
   display: flex;
   flex-direction: column;
   gap: 0;
+  padding-left: 0;
+  list-style: none;
 }
 
 .navbar-nav .nav-item {
@@ -119,6 +133,63 @@
   background-color: rgba(255, 255, 255, 0.15);
 }
 
+/* =========================================
+   NUEVO: ESTILOS PARA PANTALLAS GRANDES (PC) 
+   ========================================= */
+@media (min-width: 992px) {
+  .navbar {
+    flex-wrap: nowrap;
+    /* Evita que el menú baje a otra línea */
+  }
+
+  .navbar-inner {
+    width: auto;
+    /* Solo ocupa el tamaño del logo */
+  }
+
+  .navbar-toggler {
+    display: none !important;
+    /* Oculta la hamburguesa */
+  }
+
+  .navbar-collapse {
+    max-height: none !important;
+    /* Siempre visible */
+    overflow: visible;
+    width: auto;
+    flex-grow: 1;
+    display: flex;
+    justify-content: flex-end;
+    /* Empuja el menú a la derecha */
+  }
+
+  .navbar-nav {
+    flex-direction: row;
+    /* Elementos horizontales */
+    width: auto;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .navbar-nav .nav-item {
+    border-bottom: none;
+    /* Quita las líneas divisorias */
+    width: auto;
+  }
+
+  .categories-item {
+    margin: 0;
+  }
+
+  .categories-container {
+    flex-wrap: nowrap;
+    /* Botones de categorías en una fila */
+  }
+}
+
+/* =========================================
+   ESTILOS PARA PANTALLAS PEQUEÑAS (MÓVILES) 
+   ========================================= */
 @media (max-width: 991px) {
   .navbar {
     padding: 0.5rem 0.8rem;
@@ -152,7 +223,6 @@
     padding: 0.2rem 0.4rem;
   }
 
-  /* Make category buttons scrollable horizontally on small screens */
   .navbar-nav {
     gap: 0 !important;
   }

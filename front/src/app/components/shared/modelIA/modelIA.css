@@ -60,7 +60,10 @@
   border-radius: 4px;
   transition: color 0.15s;
 }
-.close-btn:hover { color: #4a5568; }
+
+.close-btn:hover {
+  color: #4a5568;
+}
 
 /* ── Body ── */
 .modal-body {
@@ -102,8 +105,14 @@
   transition: background 0.18s;
   letter-spacing: 0.3px;
 }
-.generate-btn:hover { background: #1a3a5c; }
-.generate-btn svg { flex-shrink: 0; }
+
+.generate-btn:hover {
+  background: #1a3a5c;
+}
+
+.generate-btn svg {
+  flex-shrink: 0;
+}
 
 /* ── Loading ── */
 .loading {
@@ -130,7 +139,9 @@
 }
 
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 /* ── Summary ── */
@@ -250,7 +261,10 @@
   letter-spacing: 0.5px;
   transition: background 0.18s;
 }
-.read-full-btn:hover { background: #1a3a5c; }
+
+.read-full-btn:hover {
+  background: #1a3a5c;
+}
 
 .save-btn {
   background: none;
@@ -264,7 +278,11 @@
   justify-content: center;
   transition: border-color 0.15s, background 0.15s;
 }
-.save-btn:hover { border-color: #b0c4dc; background: #f5f8fd; }
+
+.save-btn:hover {
+  border-color: #b0c4dc;
+  background: #f5f8fd;
+}
 
 /* ── Error ── */
 .error {

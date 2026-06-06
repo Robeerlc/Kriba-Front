@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { StatsService } from '../../service/stats.service';
 import { StatsChart } from '../../components/shared/chart/statsChart/statsChart';
 import { CategoryStats } from '../../interfaces/categoryStats.interface';
-import { InteractionService } from '../../service/interactionService.service';
 import { LateralBarComponent } from "../../components/shared/lateralBar/lateralBarComponent";
 
 @Component({
@@ -11,6 +10,7 @@ import { LateralBarComponent } from "../../components/shared/lateralBar/lateralB
   standalone: true,
   imports: [CommonModule, StatsChart, LateralBarComponent],
   templateUrl: './statisticsPage.component.html',
+  styleUrl: './statisticsPage.component.css'
 })
 export class StatsPageComponent {
   totalArticlesRead = signal<number>(0);
